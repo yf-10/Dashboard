@@ -32,12 +32,12 @@ class Logger
         if (singleton is null) {
             // Load configurations
             var section = conf.GetSection("LoggerConfig");
-            isFileOutput    = section.GetValue<bool>("FileOutput", false);
-            level           = section.GetValue<int>("Level", 2);
-            dirPath         = section.GetValue<string>("DirPath", "./logs") ?? "./logs";
-            fileName        = section.GetValue<string>("FileName", "app") ?? "app";
-            fileMaxSize     = section.GetValue<int>("FileMaxSize", 10485760);
-            filePeriod      = section.GetValue<int>("FilePeriod", 180);
+            isFileOutput    = section.GetValue<bool>("isFileOutput", false);
+            level           = section.GetValue<int>("level", 2);
+            dirPath         = section.GetValue<string>("dirPath", "./logs") ?? "./logs";
+            fileName        = section.GetValue<string>("fileName", "app") ?? "app";
+            fileMaxSize     = section.GetValue<int>("fileMaxSize", 10485760);
+            filePeriod      = section.GetValue<int>("filePeriod", 180);
             filePath        = Path.Combine(dirPath, fileName + ".log");
             // Create instance
             singleton = new Logger();

@@ -1,24 +1,18 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 using Dashboard.Models.Utility;
 
 namespace Dashboard.Controllers;
 
-public class HomeController : BaseController
+public class HomeController(IConfiguration conf) : BaseController(conf)
 {
     // ---------------------------------------------------------------------
     // Field
     // ---------------------------------------------------------------------
-    private readonly Logger? _logger = Logger.GetInstance();
+    private readonly Logger _logger = Logger.GetInstance(conf);
 
     // ---------------------------------------------------------------------
-    // Constructor
-    // ---------------------------------------------------------------------
-    public HomeController(IConfiguration conf) : base(conf) {}
-
-    // ---------------------------------------------------------------------
-    // [Get] Index
+    // [GET] Index
     // ---------------------------------------------------------------------
     public IActionResult Index() {
         _logger?.Debug("Get Index!");
@@ -26,9 +20,4 @@ public class HomeController : BaseController
         return View();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
 }

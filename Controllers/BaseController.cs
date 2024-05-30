@@ -5,23 +5,12 @@ using Dashboard.Models.Utility;
 
 namespace Dashboard.Controllers;
 
-public class BaseController : Controller
+public class BaseController(IConfiguration conf) : Controller
 {
     // ---------------------------------------------------------------------
     // Field
     // ---------------------------------------------------------------------
-    private readonly IConfiguration _conf;
-    private readonly Logger _logger;
-
-    // ---------------------------------------------------------------------
-    // Constructor
-    // ---------------------------------------------------------------------
-    public BaseController(IConfiguration conf) {
-        _conf = conf;
-        _logger = Logger.GetInstance(conf);
-        // Load configurations
-        
-    }
+    private readonly Logger _logger = Logger.GetInstance(conf);
 
     // ---------------------------------------------------------------------
     // Filter : Before action
@@ -35,7 +24,7 @@ public class BaseController : Controller
         } else {
 
         }
-
+        _logger.Info("TEST");
         base.OnActionExecuting(filterContext);
     }
 
