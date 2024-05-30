@@ -1,6 +1,7 @@
 # Dashboard
 
-### ASP.NET MVC Application 作成
+### Create ASP.NET MVC Application
+Command Prompt  
 ```
 dotnet new mvc --name Dashboard --output ./Dashboard  
 ```
