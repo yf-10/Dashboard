@@ -1,25 +1,28 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Dashboard.Models;
+
+using Dashboard.Models.Utility;
 
 namespace Dashboard.Controllers;
 
-public class HomeController : Controller
+public class HomeController : BaseController
 {
-    private readonly ILogger<HomeController> _logger;
+    // ---------------------------------------------------------------------
+    // Field
+    // ---------------------------------------------------------------------
+    private readonly Logger? _logger = Logger.GetInstance();
 
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
+    // ---------------------------------------------------------------------
+    // Constructor
+    // ---------------------------------------------------------------------
+    public HomeController(IConfiguration conf) : base(conf) {}
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+    // ---------------------------------------------------------------------
+    // [Get] Index
+    // ---------------------------------------------------------------------
+    public IActionResult Index() {
+        _logger?.Debug("Get Index!");
 
-    public IActionResult Privacy()
-    {
         return View();
     }
 
