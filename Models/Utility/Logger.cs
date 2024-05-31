@@ -118,8 +118,6 @@ class Logger
                 if (fileMaxSize < logFile.Length) {
                     // Compress log file
                     CompressLogFile();
-                    // Create new log file
-                    CreateLogfile(new FileInfo(filePath));
                     // Delete old log files
                     DeleteOldLogFile();
                 }
@@ -150,7 +148,6 @@ class Logger
     // Compress log file
     // ------------------------------------------------
     private void CompressLogFile() {
-        stream?.Close();
         string oldFileName = fileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
         string oldFilePath = Path.Combine(dirPath, oldFileName);
         File.Move(filePath, oldFilePath + ".log");
