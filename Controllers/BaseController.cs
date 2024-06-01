@@ -4,13 +4,21 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Dashboard.Models.Utility;
 
 namespace Dashboard.Controllers;
-
 public class BaseController(IConfiguration conf) : Controller
 {
     // ---------------------------------------------------------------------
     // Field
     // ---------------------------------------------------------------------
     private readonly Logger _logger = Logger.GetInstance(conf);
+
+    // ---------------------------------------------------------------------
+    // Field : Configuration
+    // ---------------------------------------------------------------------
+    public readonly string DB_HOST = conf.GetValue<string>("DatabaseConfig:host", "localhost") ?? "localhost";
+    public readonly int DB_PORT = conf.GetValue<int>("DatabaseConfig:port", 5432);
+    public readonly string DB_USER = conf.GetValue<string>("DatabaseConfig:user", "postgres") ?? "postgres";
+    public readonly string DB_PASS = conf.GetValue<string>("DatabaseConfig:pass", "") ?? "";
+    public readonly string DB_NAME = conf.GetValue<string>("DatabaseConfig:name", "postgres") ?? "postgres";
 
     // ---------------------------------------------------------------------
     // Filter : Before action

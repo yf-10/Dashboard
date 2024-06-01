@@ -10,12 +10,12 @@ class Logger
     // Field
     // ------------------------------------------------
     private enum Level { ERROR, WARN, INFO, DEBUG }
-    private static Logger? singleton = null;
-    private StreamWriter? stream = null;
-    private readonly object lockObj = new();
+    private static Logger? _singleton = null;
+    private StreamWriter? _stream = null;
+    private readonly object _lockObj = new();
 
     // ------------------------------------------------
-    // Configuration
+    // Field : Configuration
     // ------------------------------------------------
     private static bool isFileOutput = true;
     private static int level;
@@ -26,10 +26,10 @@ class Logger
     private static int filePeriod;
 
     // ------------------------------------------------
-    // Get instance
+    // Get Instance
     // ------------------------------------------------
     public static Logger GetInstance(IConfiguration conf) {
-        if (singleton is null) {
+        if (_singleton is null) {
             // Load configurations
             var section = conf.GetSection("LoggerConfig");
             isFileOutput    = section.GetValue<bool>("isFileOutput", false);
@@ -40,12 +40,12 @@ class Logger
             filePeriod      = section.GetValue<int>("filePeriod", 180);
             filePath        = Path.Combine(dirPath, fileName + ".log");
             // Create instance
-            singleton = new Logger();
+            _singleton = new Logger();
         }
-        return singleton;
+        return _singleton;
     }
     public static Logger? GetInstance() {
-        return singleton;
+        return _singleton;
     }
 
     // ------------------------------------------------
@@ -112,8 +112,8 @@ class Logger
         );
         if (isFileOutput) {
             // [File]
-            lock (lockObj) {
-                stream?.WriteLine(line);
+            lock (_lockObj) {
+                _stream?.WriteLine(line);
                 FileInfo logFile = new(filePath);
                 if (fileMaxSize < logFile.Length) {
                     // Compress log file
@@ -139,7 +139,7 @@ class Logger
             }
         }
         // Create log file (UTF-8)
-        stream = new StreamWriter(logFile.FullName, true, Encoding.UTF8) {
+        _stream = new StreamWriter(logFile.FullName, true, Encoding.UTF8) {
             AutoFlush = true
         };
     }
