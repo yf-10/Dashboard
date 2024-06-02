@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using Npgsql;
 
 using Dashboard.Models.Utility;
-using Npgsql;
-using System.Data;
+using Dashboard.Models.Service;
+using Dashboard.Models.Item;
 
 namespace Dashboard.Controllers;
 public class ApiController(IConfiguration conf) : BaseController(conf)
@@ -16,31 +18,20 @@ public class ApiController(IConfiguration conf) : BaseController(conf)
     // [GET] api/salary
     // ---------------------------------------------------------------------
     [Route("api/salary/{month?}")]
-    public IActionResult Saraly(string? month) {
-        using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
-            string sql = string.Empty;
-            Dictionary<string, dynamic> prms = [];
-            sql = """
-                select 
-                    * 
-                from 
-                    public.salary 
-                """;
-            if (month is not null) {
-                sql += """
-                where 
-                    month = @month 
-                """;
-                prms.Add("@month", new KeyValuePair<DbType, dynamic>(DbType.String, month));
+    public IActionResult Saraly(string? month, string? keyword) {
+        ApiResponseJson? response = null;
+        try {
+            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+                SalaryAccess salaryAccess = new(worker);
+                List<Salary> list = salaryAccess.GetSalary(month, keyword);
+                response = new ApiResponseJson(1, "Success", list);
             }
-            using NpgsqlDataReader reader = worker.ExecuteSqlGetData(sql, prms);
-            while (reader.Read()) {
-                _logger.Debug("month: " + reader["month"].ToString() ?? "");
-                _logger.Debug("item: " + reader["payment_item"].ToString() ?? "");
-            }
+            return Json(response);
+        } catch (Exception ex) {
+            _logger.Error(ex);
+            response = new ApiResponseJson(-1, "Failure", null);
+            return Json(response);
         }
-
-        return View();
     }
 
 }

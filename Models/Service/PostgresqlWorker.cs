@@ -1,16 +1,16 @@
-using System.IO.Compression;
-using System.Text.RegularExpressions;
-using System.Text;
-using Npgsql;
 using System.Data;
+using Npgsql;
 
-namespace Dashboard.Models.Utility;
+using Dashboard.Models.Utility;
+
+namespace Dashboard.Models.Service;
 
 class PostgresqlWorker : IDatabaseWorker
 {
     // ------------------------------------------------
     // Field
     // ------------------------------------------------
+    private readonly Logger? _logger = Logger.GetInstance();
     private bool _disposed = false;
     private readonly NpgsqlConnection? _connection = null;
 
@@ -69,18 +69,28 @@ class PostgresqlWorker : IDatabaseWorker
     }
 
     // ------------------------------------------------
+    // Add Parameter
+    // ------------------------------------------------
+    public static void AddParameter(ref Dictionary<string, dynamic> prms, string prmName, DbType prmType, dynamic prmValue) {
+        prms.Add(prmName, new KeyValuePair<DbType, dynamic>(prmType, prmValue));
+        return;
+    }
+
+    // ------------------------------------------------
     // Execute SQL : Return DataReader
     // ------------------------------------------------
     public NpgsqlDataReader ExecuteSqlGetData(string sql, Dictionary<string, dynamic>? prms) {
         using NpgsqlCommand command = new(sql, _connection);
+        _logger?.Debug("[Sql] " + sql);
         if (prms is not null || prms?.Count > 0) {
             foreach (KeyValuePair<string, dynamic> pair in prms) {
                 string prmName = pair.Key;
                 KeyValuePair<DbType, dynamic> value = pair.Value;
-                DbType dbType = value.Key;
+                DbType prmType = value.Key;
                 dynamic prmValue = value.Value;
-                command.Parameters.Add(new NpgsqlParameter(prmName, dbType));
+                command.Parameters.Add(new NpgsqlParameter(prmName, prmType));
                 command.Parameters[prmName].Value = prmValue;
+                _logger?.Debug("[Prm] " + prmName + ":" + prmValue + "(" + prmType.ToString() + ")");
             }
         }
         return command.ExecuteReader();
@@ -94,14 +104,16 @@ class PostgresqlWorker : IDatabaseWorker
     // ------------------------------------------------
     public int ExecuteSql(string sql, Dictionary<string, dynamic>? prms) {
         using NpgsqlCommand command = new(sql, _connection);
+        _logger?.Debug("[Sql] " + sql);
         if (prms is not null || prms?.Count > 0) {
             foreach (KeyValuePair<string, dynamic> pair in prms) {
                 string prmName = pair.Key;
                 KeyValuePair<DbType, dynamic> value = pair.Value;
-                DbType dbType = value.Key;
+                DbType prmType = value.Key;
                 dynamic prmValue = value.Value;
-                command.Parameters.Add(new NpgsqlParameter(prmName, dbType));
+                command.Parameters.Add(new NpgsqlParameter(prmName, prmType));
                 command.Parameters[prmName].Value = prmValue;
+                _logger?.Debug("[Prm] " + prmName + ":" + prmValue + "(" + prmType.ToString() + ")");
             }
         }
         return command.ExecuteNonQuery();

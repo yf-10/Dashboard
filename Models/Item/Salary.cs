@@ -1,6 +1,6 @@
 namespace Dashboard.Models.Item;
 
-class Saraly(string Month, bool Deduction, string PaymentItem, Money Money)
+class Salary(string Month, bool Deduction, string PaymentItem, Money Money)
 {
     public string Month { get; private set; } = Month;
     public bool Deduction { get; private set; } = Deduction;
