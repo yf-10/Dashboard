@@ -13,7 +13,7 @@ public class ApiController(IConfiguration conf) : BaseController(conf)
     private readonly Logger _logger = Logger.GetInstance(conf);
 
     // ---------------------------------------------------------------------
-    // [GET] api/salary
+    // [GET] api/salaries
     // ---------------------------------------------------------------------
     [HttpGet]
     [Route("api/salaries/{month?}")]
@@ -28,28 +28,29 @@ public class ApiController(IConfiguration conf) : BaseController(conf)
             return Json(response);
         } catch (Exception ex) {
             _logger.Error(ex);
-            response = new ApiResponseJson(-1, "Failure", 0, null);
+            response = new ApiResponseJson(-1, "Failure", 0, ex);
             return Json(response);
         }
     }
 
     // ---------------------------------------------------------------------
-    // [POST] api/salary
+    // [POST] api/salaries
     // ---------------------------------------------------------------------
     [HttpPost]
     [Route("api/salaries")]
-    public IActionResult PostSalaries([FromBody] SalariesJson salariesJson) {
+    public IActionResult PostSalaries([FromBody] SalariesJson salariesJson, string? userName) {
         ApiResponseJson? response = null;
         try {
+            User user = new(userName ?? "unknown", "", "");
             using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
                 SalaryAccess salaryAccess = new(worker);
-                int count = salaryAccess.Insert(base.ADMIN, salariesJson.Salaries);
+                int count = salaryAccess.Insert(user, salariesJson.Salaries);
                 response = new ApiResponseJson(1, "Success", count, null);
             }
             return Json(response);
         } catch (Exception ex) {
             _logger.Error(ex);
-            response = new ApiResponseJson(-1, "Failure", 0, null);
+            response = new ApiResponseJson(-1, "Failure", 0, ex);
             return Json(response);
         }
     }

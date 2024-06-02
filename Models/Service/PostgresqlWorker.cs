@@ -104,7 +104,7 @@ class PostgresqlWorker : IDatabaseWorker
     // ------------------------------------------------
     public int ExecuteSql(string sql, Dictionary<string, dynamic>? prms) {
         using NpgsqlCommand command = new(sql, _connection);
-        _logger?.Debug("[Sql] " + sql);
+        _logger?.Debug("[Sql] " + Environment.NewLine + sql);
         if (prms is not null || prms?.Count > 0) {
             foreach (KeyValuePair<string, dynamic> pair in prms) {
                 string prmName = pair.Key;

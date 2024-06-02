@@ -11,3 +11,9 @@ dotnet new mvc --name Dashboard --output ./Dashboard
 View >> Command Palette >> Nuget Package Manager: Add Package
 ```
 * Npgsql (8.0.3)  
+
+### Release Build  
+```
+dotnet publish -c Release -o ./publish
+```
+
