@@ -1,7 +1,12 @@
+using System.Runtime.Serialization;
+
 namespace Dashboard.Models.Item;
 
-class Money(int Amount, string? CurrencyCode)
+[DataContract]
+public class Money(int amount, string? currencyCode)
 {
-    public int Amount { get; private set; } = Amount;
-    public string CurrencyCode { get; private set; } = CurrencyCode ?? "JPY";
+    [DataMember]
+    public int Amount { get; private set; } = amount;
+    [DataMember]
+    public string CurrencyCode { get; private set; } = currencyCode ?? "JPY";
 }

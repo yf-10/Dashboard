@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dashboard.Models.Utility;
 
-class Logger
+public class Logger
 {
     // ------------------------------------------------
     // Field

@@ -3,12 +3,15 @@ using System.Runtime.Serialization;
 namespace Dashboard.Models.Item;
 
 [DataContract]
-class ApiResponseJson(int statuscode, string message, dynamic? data)
+public class ApiResponseJson(int status, string message, int dataCount, dynamic? data)
 {
     [DataMember]
-    public int statuscode { get; private set; } = statuscode;
+    public int Status { get; private set; } = status;
     [DataMember]
-    public string message { get; private set; } = message;
+    public string Message { get; private set; } = message;
     [DataMember]
-    public dynamic? data { get; private set; } = data;
+    public int DataCount { get; private set; } = dataCount;
+    [DataMember]
+    public dynamic? Data { get; private set; } = data;
+
 }
