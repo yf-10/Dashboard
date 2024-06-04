@@ -13,7 +13,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     private readonly Logger _logger = Logger.GetInstance(conf);
 
     // ---------------------------------------------------------------------
-    // [GET] api/batchlogs
+    // [GET] /api/batchlogs
     // ---------------------------------------------------------------------
     [HttpGet]
     [Route("api/batchlogs/{uuid?}")]
@@ -34,7 +34,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     }
 
     // ---------------------------------------------------------------------
-    // [GET] api/batchlogs/begin
+    // [GET] /api/batchlogs/begin
     // ---------------------------------------------------------------------
     [HttpGet]
     [Route("api/batchlogs/begin")]
@@ -57,10 +57,10 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     }
 
     // ---------------------------------------------------------------------
-    // [GET] api/batchlogs/complete
+    // [GET] /api/batchlogs/complete
     // ---------------------------------------------------------------------
     [HttpGet]
-    [Route("api/batchlogs/complete")]
+    [Route("api/batchlogs/{uuid}/complete")]
     public IActionResult CompleteBatchLog(string uuid, string? userName) {
         ApiResponseJson? response = null;
         try {
@@ -80,10 +80,10 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     }
 
     // ---------------------------------------------------------------------
-    // [GET] api/batchlogs/abort
+    // [GET] /api/batchlogs/abort
     // ---------------------------------------------------------------------
     [HttpGet]
-    [Route("api/batchlogs/abort")]
+    [Route("api/batchlogs/{uuid}/abort")]
     public IActionResult AbortBatchLog(string uuid, string? userName) {
         ApiResponseJson? response = null;
         try {
@@ -103,7 +103,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     }
 
     // ---------------------------------------------------------------------
-    // [POST] api/batchlogs
+    // [POST] /api/batchlogs
     // ---------------------------------------------------------------------
     [HttpPost]
     [Route("api/batchlogs")]
