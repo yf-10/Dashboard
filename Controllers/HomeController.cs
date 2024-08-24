@@ -11,11 +11,9 @@ public class HomeController(IConfiguration conf) : BaseController(conf)
     private readonly Logger _logger = Logger.GetInstance(conf);
 
     // ---------------------------------------------------------------------
-    // [GET] Index
+    // [GET] index
     // ---------------------------------------------------------------------
     public IActionResult Index() {
-        _logger?.Debug("Get Index!");
-
         return View();
     }
 

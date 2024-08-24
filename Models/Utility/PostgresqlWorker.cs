@@ -1,9 +1,7 @@
 using System.Data;
 using Npgsql;
 
-using Dashboard.Models.Utility;
-
-namespace Dashboard.Models.Service;
+namespace Dashboard.Models.Utility;
 
 class PostgresqlWorker : IDatabaseWorker
 {
@@ -14,11 +12,19 @@ class PostgresqlWorker : IDatabaseWorker
     private bool _disposed = false;
     private readonly NpgsqlConnection? _connection = null;
 
-
     // ------------------------------------------------
     // Constructor
     // ------------------------------------------------
     public PostgresqlWorker(string host, int port, string user, string pass, string name) {
+        _connection ??= new(GenerateConnectionString(host, port, user, pass, name));
+        OpenDatabase();
+    }
+    public PostgresqlWorker() {
+        string host = "localhost";
+        int port = 5432;
+        string user = "postgres";
+        string pass = "postgres";
+        string name = "postgres";
         _connection ??= new(GenerateConnectionString(host, port, user, pass, name));
         OpenDatabase();
     }
@@ -121,6 +127,5 @@ class PostgresqlWorker : IDatabaseWorker
     public int ExecuteSql(string sql) {
         return ExecuteSql(sql, null);
     }
-
 
 }

@@ -96,16 +96,15 @@ class BatchlogAccess(PostgresqlWorker worker)
             prms = [];
             PostgresqlWorker.AddParameter(ref prms, "@uuid", DbType.String, main.Uuid);
             // Execute SQL
-            using (NpgsqlDataReader reader = Worker.ExecuteSqlGetData(sql, prms)) {
-                while (reader.Read()) {
-                    BatchlogDetail data = new(
-                        reader["uuid"].ToString() ?? "",
-                        int.Parse(reader["log_no"].ToString() ?? "-1"),
-                        reader["log_msg"].ToString() ?? "",
-                        reader["log_time"].ToString() ?? ""
-                    );
-                    main.Details.Add(data);
-                }
+            using NpgsqlDataReader reader = Worker.ExecuteSqlGetData(sql, prms);
+            while (reader.Read()) {
+                BatchlogDetail data = new(
+                    reader["uuid"].ToString() ?? "",
+                    int.Parse(reader["log_no"].ToString() ?? "-1"),
+                    reader["log_msg"].ToString() ?? "",
+                    reader["log_time"].ToString() ?? ""
+                );
+                main.Details.Add(data);
             }
         };
         // ------------------------------------

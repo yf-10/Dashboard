@@ -63,7 +63,7 @@ public class BaseController(IConfiguration conf) : Controller
     // ---------------------------------------------------------------------
     public override void OnActionExecuted(ActionExecutedContext filterContext) {
         string requestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-        _logger.Info("[Done]     : " + requestId);
+        _logger.Info("DoneAction : " + requestId);
         base.OnActionExecuted(filterContext);
     }
 

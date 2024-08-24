@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Dashboard.Models.Utility;
 using Dashboard.Models.Service;
 using Dashboard.Models.Item;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dashboard.Controllers;
 public class BatchController(IConfiguration conf) : BaseController(conf)
@@ -16,6 +17,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     // [GET] /api/batchlogs
     // ---------------------------------------------------------------------
     [HttpGet]
+    [Authorize]
     [Route("api/batchlogs/{uuid?}")]
     public IActionResult GetBatchLogs(string? uuid, string? keyword, string? status) {
         ApiResponseJson? response = null;
@@ -111,9 +113,9 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
         ApiResponseJson? response = null;
         try {
             if (string.IsNullOrEmpty(log.Uuid))
-                throw new ArgumentNullException("UUID is necessary");
+                throw new ArgumentException("UUID is necessary");
             if (string.IsNullOrEmpty(log.LogMsg))
-                throw new ArgumentNullException("Log message is necessary");
+                throw new ArgumentException("Log message is necessary");
             User user = new(userName ?? "unknown", "", "");
             using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
                 BatchlogAccess batchlogAccess = new(worker);

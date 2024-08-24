@@ -1,6 +1,5 @@
-using System.IO.Compression;
-using System.Text.RegularExpressions;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Dashboard.Models.Utility;
 
@@ -106,8 +105,8 @@ public class Logger
         string line = string.Format(
             "[{0}][{1}][{2}] {3}",
             DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
-            tid,
-            level.ToString(),
+            tid.ToString().PadLeft(5, ' '),
+            level.ToString().PadRight(5, ' '),
             msg
         );
         if (isFileOutput) {
@@ -116,9 +115,7 @@ public class Logger
                 _stream?.WriteLine(line);
                 FileInfo logFile = new(filePath);
                 if (fileMaxSize < logFile.Length) {
-                    // Compress log file
-                    CompressLogFile();
-                    // Delete old log files
+                    ArchiveLogFile();
                     DeleteOldLogFile();
                 }
             }
@@ -145,28 +142,12 @@ public class Logger
     }
 
     // ------------------------------------------------
-    // Compress log file
+    // Archive log file
     // ------------------------------------------------
-    private void CompressLogFile() {
-        string oldFileName = fileName + "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-        string oldFilePath = Path.Combine(dirPath, oldFileName);
-        File.Move(filePath, oldFilePath + ".log");
-        // Compress with "GZip"
-        FileStream inStream     = new FileStream(oldFilePath + ".log", FileMode.Open, FileAccess.Read);
-        FileStream outStream    = new FileStream(oldFilePath + ".gz", FileMode.Create, FileAccess.Write);
-        GZipStream gzStream     = new GZipStream(outStream, CompressionMode.Compress);
-        byte[] buffer = new byte[fileMaxSize + 1000];
-        int size;
-        while (0 < (size = inStream.Read(buffer, 0, buffer.Length))) {
-            gzStream.Write(buffer, 0, size);
-        }
-        // Close stream
-        inStream.Close();
-        outStream.Close();
-        gzStream.Close();
-        // Delete work file
-        File.Delete(oldFilePath + ".log");
-        // Create new log file
+    private void ArchiveLogFile() {
+        string archiveFileName = string.Concat(fileName, "_", DateTime.Now.ToString("yyyyMMddHHmmss"), ".log");
+        string archiveFilePath = Path.Combine(dirPath, archiveFileName);
+        File.Move(filePath, archiveFilePath);
         CreateLogfile(new FileInfo(filePath));
     }
 
@@ -174,10 +155,10 @@ public class Logger
     // Delete old log file
     // ------------------------------------------------
     private void DeleteOldLogFile() {
-        // Specified file name "filename_yyyyMMddHHmmss.gz"
-        Regex regex = new(fileName + @"_(\d{14}).*\.gz");
+        // Specified file name "[filename]_yyyyMMddHHmmss.log"
+        Regex regex = new(fileName + @"_(\d{14}).*\.log");
         DateTime retentionDate = DateTime.Today.AddDays(-filePeriod);
-        string[] filePathList = Directory.GetFiles(dirPath, fileName + "_*.gz", SearchOption.TopDirectoryOnly);
+        string[] filePathList = Directory.GetFiles(dirPath, fileName + "_*.log", SearchOption.TopDirectoryOnly);
         foreach (string filePath in filePathList) {
             Match match = regex.Match(filePath);
             if (match.Success) {

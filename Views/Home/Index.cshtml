@@ -1,19 +1,32 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Welcome";
 }
 
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Home</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item active">Welcome to Fujino's dashboard! Select menu.</li>
-    </ol>
+    <h1 class="mt-4 mb-4">Welcome</h1>
 
+    <!-- CONTROL -->
+    <p class="text-secondary fs-6">Control</p>
     <div class="row">
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="card-body">Budget Management</div>
+        <div class="col-xl-3 col-md-4 col-sm-6">
+            <div class="card bg-danger text-white mb-4">
+                <div class="card-body">API</div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="~/Budget/Graph">View Details</a>
+                    <a class="small text-white stretched-link" href="~/api">View Detail</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION -->
+    <p class="text-secondary fs-6">Action</p>
+    <div class="row">
+        <div class="col-xl-3 col-md-4 col-sm-6">
+            <div class="card bg-primary text-white mb-4">
+                <div class="card-body">Batch</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="~/Budget/Graph">View Detail</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                 </div>
             </div>

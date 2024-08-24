@@ -5,38 +5,36 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Welcome to Fujino's dashboard!!" />
-    <meta name="author" content="Y.Fujino" />
+    <meta name="description" content="This is yf-10's dashboard!!" />
+    <meta name="author" content="yf-10" />
 
     <!-- Title -->
     <title>@ViewData["Title"] - Dashboard</title>
 
     <!-- Favicon -->
-    <link href="~/assets/img/code-solid.svg" rel="icon" type="image/svg+xml">
+    <link href="~/img/17507_color.svg" rel="icon" type="image/svg+xml">
 
-    <!-- [CSS] -->
+    <!-- Cascading Style Sheet Bootstrap5 -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/lib/datatables/datatables-7.1.2.min.css" rel="stylesheet">
 
-    <!-- [CSS] Original Shared -->
+    <!-- Cascading Style Sheet Shared -->
     <link href="~/css/shared/site.css" rel="stylesheet">
     <link href="~/css/shared/styles.css" rel="stylesheet">
 
-    <!-- [JS] Fontawesome -->
+    <!-- JavaScript Fontawesome -->
     <script src="~/lib/fontawesome/fontawesome-6.3.0.all.js"></script>
 
 </head>
 
 <body class="sb-nav-fixed">
 
-    <!-- TOPBAR NAVIGATION -->
+    <!-- TopBar -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Brand Logo -->
-        <a class="navbar-brand ps-3" href="~/Login/Auth">
-            <i class="fa-solid fa-laptop-code"></i>
+        <a class="navbar-brand ps-3" href="~/">
             <span>Dashboard</span>
         </a>
-        <!-- Sidebar Toggle -->
+        <!-- Sidebar Toggle # -->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
             <i class="fas fa-bars"></i>
         </button>
@@ -60,78 +58,86 @@
             </li>
         </ul>
     </nav>
-    <!-- /TOPBAR NAVIGATION -->
+    <!-- /TopBar -->
 
     <div id="layoutSidenav">
 
-        <!-- SIDEBAR NAVIGATION -->
+        <!-- SideBar -->
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <!-- Core -->
-                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <!-- HOME -->
+                        <div class="sb-sidenav-menu-heading">HOME</div>
                         <a class="nav-link" href="~/">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                            Home
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-door-open"></i></div>
+                            Welcome
                         </a>
-                        <!-- Action -->
-                        <div class="sb-sidenav-menu-heading">Action</div>
+                        <!-- CONTROL -->
+                        <div class="sb-sidenav-menu-heading">CONTROL</div>
+                        <a class="nav-link" href="~/api">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-key"></i></div>
+                            API
+                        </a>
+                        <!-- ACTION -->
+                        <div class="sb-sidenav-menu-heading">ACTION</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-database"></i></div>
-                            Import
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-microchip"></i></div>
+                            Batch
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Salary from Gmail</a>
+                                <a class="nav-link" href="#">
+                                    <i class="fa-solid fa-file-import me-2"></i>Data Import
+                                </a>
                             </nav>
                         </div>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small"></div>
-                    <div class="small">Powered by Bootstrap 5.2.3</div>
+                    <div class="small">
+                        <i class="fa-solid fa-code-commit me-1"></i>Version 1.0
+                    </div>
                 </div>
             </nav>
         </div>
-        <!-- /SIDEBAR NAVIGATION -->
+        <!-- /SideBar -->
 
         <div id="layoutSidenav_content">
 
-            <!-- PAGE CONTENT -->
-            <main>@RenderBody()</main>
-            <!-- /PAGE CONTENT -->
+            <!-- Page Content -->
+            <main>
+                @RenderBody()
+            </main>
+            <!-- /Page Content -->
 
-            <!-- FOOTER -->
+            <!-- Footer -->
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; Y.Fujino 2024</div>
-                        <div>
-                            <a href="~/Privacy">Privacy Policy</a>
-                            &middot;
-                            <a href="~/Error">Terms &amp; Conditions</a>
-                        </div>
                     </div>
                 </div>
             </footer>
-            <!-- /FOOTER -->
+            <!-- /Footer -->
 
         </div>
 
     </div>
 
-    <!-- [JS] -->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/chartjs/chartjs-2.8.0.min.js"></script>
-    <script src="~/lib/datatables/datatables-7.1.2.min.js"></script>
+    <!-- Partial View -->
+    @await Html.PartialAsync("_Toast");
 
-    <!-- [JS] Original Shared -->
+    <!-- JavaScript Bootstrap5 -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript Original Shared -->
     <script src="~/js/shared/site.js"></script>
     <script src="~/js/shared/scripts.js"></script>
+    <script src="~/js/shared/toast.js"></script>
 
-    <!-- [JS] Page Content -->
+    <!-- JavaScript Page Content -->
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>

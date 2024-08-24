@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "API";
+}
+
+<div class="container-fluid px-4">
+
+    <p class="text-secondary fs-6 mt-4"></p>
+    <div class="row">
+        <div class="col-xl-3 col-md-4 col-sm-6">
+            <button type="button" class="btn btn-danger fw-bold" id="btnGenerateApiKey">
+                <i class="fa-solid fa-key me-1"></i>Get / Generate API key
+            </button>
+        </div>
+    </div>
+
+    <p class="text-dark fs-6 fw-bold mt-4">
+        <span class="badge rounded-pill text-bg-dark">User ID</span>
+        <span class="ms-1" id="txtUserID">admin</span>
+    </p>
+    <p class="text-dark fs-6 fw-bold">
+        <span class="badge rounded-pill text-bg-dark">API key</span>
+        <span class="ms-1" id="txtApiKey">***</span>
+    </p>
+
+</div>
+
+@section Scripts{
+    <script src="~/js/shared/common.js"></script>
+    <script src="~/js/api/api.js"></script>
+}

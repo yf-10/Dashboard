@@ -1,4 +1,4 @@
-namespace Dashboard.Models.Service;
+namespace Dashboard.Models.Utility;
 
 interface IDatabaseWorker : IDisposable
 {
