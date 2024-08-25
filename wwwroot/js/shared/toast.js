@@ -16,7 +16,7 @@ class CommonToast {
   Show(header, body) {
     const now = new Date();
     this.headerTextEl.innerHTML = header;
-    this.headerTimeEl.innerHTML = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+    this.headerTimeEl.innerHTML = ('0'+now.getHours()).slice(-2) + ":" + ('0'+now.getMinutes()).slice(-2);
     this.bodyTextEl.innerHTML = body;
     this.toast.show();
   }

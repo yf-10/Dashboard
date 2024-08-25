@@ -10,16 +10,17 @@ builder.Services
             .AddAuthentication("Api")
             .AddScheme<AuthenticationSchemeOptions, AuthHandler>("Api", options => { });
 
+// Add session.
 builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromSeconds(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
 
-// CORS Origin settings.
+// Add CORS.
 builder.Services.AddCors(options => {
     options.AddPolicy(
-        "AllowAll",
+        "AllowAllOrigins",
         builder => {
             builder.AllowAnyOrigin() // Allowed all origins
                    .AllowAnyMethod()
@@ -37,22 +38,33 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// Enable CORS
-app.UseCors("AllowAll"); // Notice: Required to call this method before "app.UseStaticFiles()"
+// Enable CORS.
+app.UseCors("AllowAllOrigins"); // Note: Required to call this method before "app.UseStaticFiles()"
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+// Redirect error to custom pages.
+app.UseStatusCodePagesWithRedirects("/error/{0}");
+if (app.Environment.IsDevelopment()) {
+    app.UseDeveloperExceptionPage();
+}
+
+// Enable routing.
 app.UseRouting();
 
+// Enable authentication.
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Enable session.
 app.UseSession();
 
+// Define routes.
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}"
 );
 
+// Run application.
 app.Run();

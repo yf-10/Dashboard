@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
-using Dashboard.Models.Item;
+using Dashboard.Models.Data;
 
 namespace Dashboard.Controllers;
 public class AuthHandler(

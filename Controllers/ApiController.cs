@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using Dashboard.Models.Utility;
 using Dashboard.Models.Service;
-using Dashboard.Models.Item;
+using Dashboard.Models.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dashboard.Controllers;
 public class ApiController(IConfiguration conf) : BaseController(conf)
@@ -29,7 +30,7 @@ public class ApiController(IConfiguration conf) : BaseController(conf)
     public IActionResult ApiKey(string userId) {
         ApiResponseJson? response = null;
         try {
-            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+            using (PostgresqlWorker worker = new()) {
                 User user = new(userId, "", "");
                 ApiKeyAccess apiKeyAccess = new(worker);
                 List<ApiKey> list = apiKeyAccess.Select(userId);
@@ -52,11 +53,12 @@ public class ApiController(IConfiguration conf) : BaseController(conf)
     // [GET] api/salaries
     // ---------------------------------------------------------------------
     [HttpGet]
+    [Authorize]
     [Route("api/salaries/{month?}")]
     public IActionResult GetSalaries(string? month, string? keyword) {
         ApiResponseJson? response = null;
         try {
-            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+            using (PostgresqlWorker worker = new()) {
                 SalaryAccess salaryAccess = new(worker);
                 List<Salary> list = salaryAccess.Select(month, keyword);
                 response = new ApiResponseJson(0, "Success", list.Count, list);
@@ -73,12 +75,13 @@ public class ApiController(IConfiguration conf) : BaseController(conf)
     // [POST] api/salaries
     // ---------------------------------------------------------------------
     [HttpPost]
+    [Authorize]
     [Route("api/salaries")]
     public IActionResult PostSalaries([FromBody] SalariesJson salariesJson, string? userName) {
         ApiResponseJson? response = null;
         try {
             User user = new(userName ?? "unknown", "", "");
-            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+            using (PostgresqlWorker worker = new()) {
                 SalaryAccess salaryAccess = new(worker);
                 int count = salaryAccess.Insert(user, salariesJson.Salaries);
                 response = new ApiResponseJson(0, "Success", count, null);

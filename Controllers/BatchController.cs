@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Dashboard.Models.Utility;
 using Dashboard.Models.Service;
-using Dashboard.Models.Item;
+using Dashboard.Models.Data;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Dashboard.Controllers;
@@ -22,10 +22,10 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     public IActionResult GetBatchLogs(string? uuid, string? keyword, string? status) {
         ApiResponseJson? response = null;
         try {
-            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+            using (PostgresqlWorker worker = new()) {
                 BatchlogAccess batchlogAccess = new(worker);
                 List<BatchlogMain> batchlogMainList = batchlogAccess.Select(uuid, keyword, status);
-                response = new(1, "Success", batchlogMainList.Count, batchlogMainList);
+                response = new(0, "Success", batchlogMainList.Count, batchlogMainList);
             }
             return Json(response);
         } catch (Exception ex) {
@@ -39,16 +39,17 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     // [GET] /api/batchlogs/begin
     // ---------------------------------------------------------------------
     [HttpGet]
+    [Authorize]
     [Route("api/batchlogs/begin")]
     public IActionResult BeginBatchlog(string programId, string programName, string? userName) {
         ApiResponseJson? response = null;
         try {
             User user = new(userName ?? "unknown", "", "");
-            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+            using (PostgresqlWorker worker = new()) {
                 BatchlogAccess batchlogAccess = new(worker);
                 string uuid = batchlogAccess.Begin(user, programId, programName);
                 List<BatchlogMain> batchlogMainList = batchlogAccess.Select(uuid, null, null);
-                response = new(1, "Success", batchlogMainList.Count, batchlogMainList);
+                response = new(0, "Success", batchlogMainList.Count, batchlogMainList);
             }
             return Json(response);
         } catch (Exception ex) {
@@ -62,16 +63,17 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     // [GET] /api/batchlogs/complete
     // ---------------------------------------------------------------------
     [HttpGet]
+    [Authorize]
     [Route("api/batchlogs/{uuid}/complete")]
     public IActionResult CompleteBatchLog(string uuid, string? userName) {
         ApiResponseJson? response = null;
         try {
             User user = new(userName ?? "unknown", "", "");
-            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+            using (PostgresqlWorker worker = new()) {
                 BatchlogAccess batchlogAccess = new(worker);
                 batchlogAccess.Complete(user, uuid);
                 List<BatchlogMain> batchlogMainList = batchlogAccess.Select(uuid, null, null);
-                response = new(1, "Success", batchlogMainList.Count, batchlogMainList);
+                response = new(0, "Success", batchlogMainList.Count, batchlogMainList);
             }
             return Json(response);
         } catch (Exception ex) {
@@ -85,16 +87,17 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     // [GET] /api/batchlogs/abort
     // ---------------------------------------------------------------------
     [HttpGet]
+    [Authorize]
     [Route("api/batchlogs/{uuid}/abort")]
     public IActionResult AbortBatchLog(string uuid, string? userName) {
         ApiResponseJson? response = null;
         try {
             User user = new(userName ?? "unknown", "", "");
-            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+            using (PostgresqlWorker worker = new()) {
                 BatchlogAccess batchlogAccess = new(worker);
                 batchlogAccess.Abort(user, uuid);
                 List<BatchlogMain> batchlogMainList = batchlogAccess.Select(uuid, null, null);
-                response = new(1, "Success", batchlogMainList.Count, batchlogMainList);
+                response = new(0, "Success", batchlogMainList.Count, batchlogMainList);
             }
             return Json(response);
         } catch (Exception ex) {
@@ -108,6 +111,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
     // [POST] /api/batchlogs
     // ---------------------------------------------------------------------
     [HttpPost]
+    [Authorize]
     [Route("api/batchlogs")]
     public IActionResult AddBatchLog([FromBody] BatchlogDetail log, string? userName) {
         ApiResponseJson? response = null;
@@ -117,11 +121,11 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
             if (string.IsNullOrEmpty(log.LogMsg))
                 throw new ArgumentException("Log message is necessary");
             User user = new(userName ?? "unknown", "", "");
-            using (PostgresqlWorker worker = new(base.DB_HOST, base.DB_PORT, base.DB_USER, base.DB_PASS, base.DB_NAME)) {
+            using (PostgresqlWorker worker = new()) {
                 BatchlogAccess batchlogAccess = new(worker);
                 string uuid = batchlogAccess.AddLog(user, log.Uuid, log.LogMsg);
                 List<BatchlogMain> batchlogMainList = batchlogAccess.Select(uuid, null, null);
-                response = new(1, "Success", batchlogMainList.Count, batchlogMainList);
+                response = new(0, "Success", batchlogMainList.Count, batchlogMainList);
             }
             return Json(response);
         } catch (Exception ex) {

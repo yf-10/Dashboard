@@ -1,0 +1,21 @@
+﻿@{
+    const string ERROR_CODE = "403";
+    const string ERROR_MESSAGE = "Forbidden";
+    ViewData["Title"] = ERROR_CODE;
+}
+
+<div class="container-fluid px-4">
+
+    <p class="text-secondary fs-6 mt-4"></p>
+    <div class="row">
+        <div class="col-xl-12 col-md-12 col-sm-12">
+            <h1 class="text-danger">
+                <i class="fa-solid fa-triangle-exclamation me-3"></i>@(ERROR_CODE + " " + ERROR_MESSAGE)
+            </h1>
+            <h4 class="text-danger">
+                An error occurred while processing your request.
+            </h4>
+        </div>
+    </div>
+
+</div>

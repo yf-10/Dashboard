@@ -17,4 +17,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\js\api\api.ts" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\ViewModel\" />
+  </ItemGroup>
 </Project>

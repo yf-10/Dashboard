@@ -15,10 +15,6 @@ class PostgresqlWorker : IDatabaseWorker
     // ------------------------------------------------
     // Constructor
     // ------------------------------------------------
-    public PostgresqlWorker(string host, int port, string user, string pass, string name) {
-        _connection ??= new(GenerateConnectionString(host, port, user, pass, name));
-        OpenDatabase();
-    }
     public PostgresqlWorker() {
         string host = "localhost";
         int port = 5432;

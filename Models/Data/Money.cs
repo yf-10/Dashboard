@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Dashboard.Models.Item;
+namespace Dashboard.Models.Data;
 
 [DataContract]
 public class Money(int amount, string? currencyCode)

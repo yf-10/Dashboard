@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Dashboard.Models.Item;
+namespace Dashboard.Models.Data;
 
 [DataContract]
 public class ApiResponseJson(int status, string message, int dataCount, dynamic? data)

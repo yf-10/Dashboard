@@ -1,4 +1,4 @@
-namespace Dashboard.Models.Item;
+namespace Dashboard.Models.Data;
 
 public class User(string id, string name, string email)
 {

@@ -1,7 +1,7 @@
 using System.Data;
 using Npgsql;
 
-using Dashboard.Models.Item;
+using Dashboard.Models.Data;
 using Dashboard.Models.Utility;
 
 namespace Dashboard.Models.Service;
