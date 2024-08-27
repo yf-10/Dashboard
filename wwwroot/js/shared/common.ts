@@ -41,5 +41,9 @@ const FetchDataWithHeaderAsync = async <T>(url: string, headers: HeadersInit): P
 }
 
 const GetOrigin = (): string => {
-    return location.origin;
+    if (location.pathname.indexOf('dashboard')) {
+        return location.origin + '/dashboard';
+    } else {
+        return location.origin;
+    }
 }

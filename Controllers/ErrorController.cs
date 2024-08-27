@@ -18,7 +18,7 @@ public class ErrorController(IConfiguration conf) : BaseController(conf)
     [Route("error/{code?}")]
     public IActionResult Error(string? code) {
         _logger.Error("ERROR CODE:" + code ?? "");
-        return View("../Error/" + code);
+        return View(code);
     }
 
 }

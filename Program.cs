@@ -41,14 +41,14 @@ if (!app.Environment.IsDevelopment())
 // Enable CORS.
 app.UseCors("AllowAllOrigins"); // Note: Required to call this method before "app.UseStaticFiles()"
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
 // Redirect error to custom pages.
-app.UseStatusCodePagesWithRedirects("/error/{0}");
+app.UseStatusCodePagesWithRedirects("~/error/{0}");
 if (app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 // Enable routing.
 app.UseRouting();

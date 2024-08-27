@@ -31,6 +31,11 @@ const FetchDataWithHeaderAsync = (url, headers) => __awaiter(this, void 0, void 
     return responseJson;
 });
 const GetOrigin = () => {
-    return location.origin;
+    if (location.pathname.indexOf('dashboard')) {
+        return location.origin + '/dashboard';
+    }
+    else {
+        return location.origin;
+    }
 };
 //# sourceMappingURL=common.js.map
