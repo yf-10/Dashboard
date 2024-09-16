@@ -31,7 +31,7 @@ const FetchDataWithHeaderAsync = (url, headers) => __awaiter(this, void 0, void 
     return responseJson;
 });
 const GetOrigin = () => {
-    if (location.pathname.indexOf('dashboard')) {
+    if (location.pathname.indexOf('dashboard') > 0) {
         return location.origin + '/dashboard';
     }
     else {

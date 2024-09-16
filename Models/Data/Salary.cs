@@ -3,8 +3,7 @@ using System.Runtime.Serialization;
 namespace Dashboard.Models.Data;
 
 [DataContract]
-public class Salary(string month, bool deduction, string paymentItem, Money money)
-{
+public class Salary(string month, bool deduction, string paymentItem, Money money) {
     [DataMember]
     public string Month { get; private set; } = month;
     [DataMember]

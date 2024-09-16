@@ -3,8 +3,7 @@ using System.Runtime.Serialization;
 namespace Dashboard.Models.Data;
 
 [DataContract]
-public class BatchlogDetail(string? uuid, int? logNo, string? logMsg, string? logTime)
-{
+public class BatchlogDetail(string? uuid, int? logNo, string? logMsg, string? logTime) {
     [DataMember]
     public string? Uuid { get; private set; } = uuid;
     [DataMember]

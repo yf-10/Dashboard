@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 
 using Dashboard.Models.Utility;
-using Dashboard.Models;
 
 namespace Dashboard.Controllers;
-public class ErrorController(IConfiguration conf) : BaseController(conf)
-{
+public class ErrorController(IConfiguration conf) : BaseController(conf) {
     // ---------------------------------------------------------------------
     // Field
     // ---------------------------------------------------------------------

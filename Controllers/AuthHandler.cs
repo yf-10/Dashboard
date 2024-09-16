@@ -1,11 +1,12 @@
-﻿using Dashboard.Models.Service;
-using Dashboard.Models.Utility;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
+
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 
 using Dashboard.Models.Data;
+using Dashboard.Models.Service;
+using Dashboard.Models.Utility;
 
 namespace Dashboard.Controllers;
 public class AuthHandler(
@@ -45,7 +46,7 @@ public class AuthHandler(
         }
 
         // Authorization success
-        var p = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, name) }, "AuthType"));
+        var p = new ClaimsPrincipal(new ClaimsIdentity([new Claim(ClaimTypes.Name, name)], "AuthType"));
         return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(p, "Api")));
     }
 

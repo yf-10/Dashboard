@@ -1,4 +1,5 @@
 using System.Data;
+
 using Npgsql;
 
 using Dashboard.Models.Data;
@@ -6,12 +7,10 @@ using Dashboard.Models.Utility;
 
 namespace Dashboard.Models.Service;
 
-class SalaryAccess(PostgresqlWorker worker)
-{
+class SalaryAccess(PostgresqlWorker worker) {
     // ------------------------------------------------
     // Field
     // ------------------------------------------------
-    private readonly Logger? _logger = Logger.GetInstance();
     private PostgresqlWorker Worker { get; set; } = worker;
     private string sql = string.Empty;
     private Dictionary<string, dynamic> prms = [];

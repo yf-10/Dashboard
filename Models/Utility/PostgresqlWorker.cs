@@ -1,35 +1,42 @@
-using System.Data;
+using System.Data.Common;
+
 using Npgsql;
 
 namespace Dashboard.Models.Utility;
 
-class PostgresqlWorker : IDatabaseWorker
-{
-    // ------------------------------------------------
-    // Field
-    // ------------------------------------------------
-    private readonly Logger? _logger = Logger.GetInstance();
-    private bool _disposed = false;
-    private readonly NpgsqlConnection? _connection = null;
+class PostgresqlWorker : IDatabaseWorker {
+    private readonly Logger? logger = Logger.GetInstance();
+    private bool disposed = false;
+    private readonly NpgsqlConnection? connection = null;
 
     // ------------------------------------------------
     // Constructor
     // ------------------------------------------------
     public PostgresqlWorker() {
-        string host = "localhost";
-        int port = 5432;
-        string user = "postgres";
-        string pass = "postgres";
-        string name = "postgres";
-        _connection ??= new(GenerateConnectionString(host, port, user, pass, name));
+        const string host = "localhost";
+        const int port = 5432;
+        const string user = "postgres";
+        const string pass = "postgres";
+        const string name = "postgres";
+        connection ??= new(GenerateConnectionString(host, port, user, pass, name));
         OpenDatabase();
     }
 
     // ------------------------------------------------
-    // Destructor
+    // Destructor/Dispose
     // ------------------------------------------------
     ~PostgresqlWorker() {
         Dispose(false);
+    }
+    public void Dispose() {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+    protected virtual void Dispose(bool disposing) {
+        if (disposed == false) {
+            if (disposing) CloseDatabase();
+            disposed = true;
+        }
     }
 
     // ------------------------------------------------
@@ -43,80 +50,48 @@ class PostgresqlWorker : IDatabaseWorker
     // Open Database
     // ------------------------------------------------
     public void OpenDatabase() {
-        _connection?.Open();
+        connection?.Open();
     }
 
     // ------------------------------------------------
     // Close Database
     // ------------------------------------------------
     public void CloseDatabase() {
-        _connection?.Close();
-        _connection?.Dispose();
-    }
-
-    // ------------------------------------------------
-    // Dispose
-    // ------------------------------------------------
-    public void Dispose() {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-    protected virtual void Dispose(bool disposing) {
-        if (!_disposed) {
-            if (disposing) {
-                CloseDatabase();
-            }
-            _disposed = true;
-        }
-    }
-
-    // ------------------------------------------------
-    // Add Parameter
-    // ------------------------------------------------
-    public static void AddParameter(ref Dictionary<string, dynamic> prms, string prmName, DbType prmType, dynamic prmValue) {
-        prms.Add(prmName, new KeyValuePair<DbType, dynamic>(prmType, prmValue));
-        return;
+        connection?.Close();
+        connection?.Dispose();
     }
 
     // ------------------------------------------------
     // Execute SQL : Return DataReader
     // ------------------------------------------------
-    public NpgsqlDataReader ExecuteSqlGetData(string sql, Dictionary<string, dynamic>? prms) {
-        using NpgsqlCommand command = new(sql, _connection);
-        _logger?.Debug("[Sql] " + Environment.NewLine + sql);
+    public DbDataReader ExecuteSqlGetData(string sql, List<IDatabaseWorker.Parameter>? prms) {
+        using NpgsqlCommand command = new(sql, connection);
+        logger?.Debug("[Sql] " + Environment.NewLine + sql);
         if (prms is not null || prms?.Count > 0) {
-            foreach (KeyValuePair<string, dynamic> pair in prms) {
-                string prmName = pair.Key;
-                KeyValuePair<DbType, dynamic> value = pair.Value;
-                DbType prmType = value.Key;
-                dynamic prmValue = value.Value;
-                command.Parameters.Add(new NpgsqlParameter(prmName, prmType));
-                command.Parameters[prmName].Value = prmValue;
-                _logger?.Debug("[Prm] " + prmName + ":" + prmValue + "(" + prmType.ToString() + ")");
-            }
+            prms.ForEach(prm => {
+                command.Parameters.Add(new NpgsqlParameter(prm.Name, prm.Type));
+                command.Parameters[prm.Name].Value = prm.Value;
+                logger?.Debug("[Prm] " + prm.Name + ":" + prm.Value + "(" + prm.Type.ToString() + ")");
+            });
         }
         return command.ExecuteReader();
     }
-    public NpgsqlDataReader ExecuteSqlGetData(string sql) {
+    public DbDataReader ExecuteSqlGetData(string sql) {
         return ExecuteSqlGetData(sql, null);
     }
 
     // ------------------------------------------------
     // Execute SQL : NonQuery
     // ------------------------------------------------
-    public int ExecuteSql(string sql, Dictionary<string, dynamic>? prms) {
-        using NpgsqlCommand command = new(sql, _connection);
-        _logger?.Debug("[Sql] " + Environment.NewLine + sql);
+    public int ExecuteSql(string sql, List<IDatabaseWorker.Parameter>? prms) {
+        using NpgsqlCommand command = new(sql, connection);
+        logger?.Debug("[Sql] " + Environment.NewLine + sql);
         if (prms is not null || prms?.Count > 0) {
-            foreach (KeyValuePair<string, dynamic> pair in prms) {
-                string prmName = pair.Key;
-                KeyValuePair<DbType, dynamic> value = pair.Value;
-                DbType prmType = value.Key;
-                dynamic prmValue = value.Value;
-                command.Parameters.Add(new NpgsqlParameter(prmName, prmType));
-                command.Parameters[prmName].Value = prmValue;
-                _logger?.Debug("[Prm] " + prmName + ":" + prmValue + "(" + prmType.ToString() + ")");
-            }
+            prms.ForEach(prm => {
+                command.Parameters.Add(new NpgsqlParameter(prm.Name, prm.Type));
+                command.Parameters[prm.Name].Value = prm.Value;
+                logger?.Debug("[Prm] " + prm.Name + ":" + prm.Value + "(" + prm.Type.ToString() + ")");
+            });
         }
         return command.ExecuteNonQuery();
     }

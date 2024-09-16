@@ -1,4 +1,5 @@
 using System.Data;
+
 using Npgsql;
 
 using Dashboard.Models.Data;
@@ -6,15 +7,13 @@ using Dashboard.Models.Utility;
 
 namespace Dashboard.Models.Service;
 
-class ApiKeyAccess(PostgresqlWorker worker)
-{
+class ApiKeyAccess(PostgresqlWorker worker) {
     // ------------------------------------------------
     // Field
     // ------------------------------------------------
-    private readonly Logger? _logger = Logger.GetInstance();
     private PostgresqlWorker Worker { get; set; } = worker;
     private string sql = string.Empty;
-    private Dictionary<string, dynamic> prms = [];
+    private List<IDatabaseWorker.Parameter> prms = [];
 
     // ------------------------------------------------
     // Function : Select
@@ -44,10 +43,10 @@ class ApiKeyAccess(PostgresqlWorker worker)
             sql += """
                 and user_id = @user_id
             """;
-            PostgresqlWorker.AddParameter(ref prms, "@user_id", DbType.String, userId);
+            prms.Add(new IDatabaseWorker.Parameter("@user_id", userId, DbType.String));
         }
         // Execute SQL
-        using NpgsqlDataReader reader = Worker.ExecuteSqlGetData(sql, prms);
+        using NpgsqlDataReader reader = (NpgsqlDataReader)Worker.ExecuteSqlGetData(sql, prms);
         while (reader.Read()) {
             ApiKey data = new(
                 new User(
@@ -102,12 +101,12 @@ class ApiKeyAccess(PostgresqlWorker worker)
                     updated_at = now()
             """;
         // Add Parameters
-        PostgresqlWorker.AddParameter(ref prms, "@user_id", DbType.String, apiKey.User.Id);
-        PostgresqlWorker.AddParameter(ref prms, "@email", DbType.String, apiKey.User.Email);
-        PostgresqlWorker.AddParameter(ref prms, "@apikey", DbType.String, apiKey.Key);
-        PostgresqlWorker.AddParameter(ref prms, "@status", DbType.String, apiKey.Status);
-        PostgresqlWorker.AddParameter(ref prms, "@created_by", DbType.String, user.Name);
-        PostgresqlWorker.AddParameter(ref prms, "@updated_by", DbType.String, user.Name);
+        prms.Add(new IDatabaseWorker.Parameter("@user_id", apiKey.User.Id, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@email", apiKey.User.Email, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@apikey", apiKey.Key, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@status", apiKey.Status, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@created_by", user.Name, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@updated_by", user.Name, DbType.String));
         // Execute SQL
         int insertedCount = Worker.ExecuteSql(sql, prms);
         if (insertedCount > 0) count++;

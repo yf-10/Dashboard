@@ -7,11 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// Class Definition
 class Api {
-    // Constructor
     constructor() {
-        // Generate API Key
         this.GenerateApiKeyAsync = () => __awaiter(this, void 0, void 0, function* () {
             const userId = this.txtUserID.innerText;
             try {
@@ -34,7 +31,6 @@ class Api {
                 this.txtApiKey.innerText = "***";
             }
         });
-        // Fetch Header Test
         this.TestAsync = () => __awaiter(this, void 0, void 0, function* () {
             const userId = this.txtUserID.innerText;
             try {
@@ -61,20 +57,16 @@ class Api {
                 this.txtApiKey.innerText = "***";
             }
         });
-        // HTML Element
         this.btnGenerateApiKey = document.getElementById('btnGenerateApiKey');
         this.txtUserID = document.getElementById('txtUserID');
         this.txtApiKey = document.getElementById('txtApiKey');
         this.btnTest = document.getElementById('btnTest');
-        // Set User ID
         this.txtUserID.innerText = "admin";
-        // Add Button Click Event Listener
         if (this.btnGenerateApiKey) {
             this.btnGenerateApiKey.addEventListener('click', (event) => __awaiter(this, void 0, void 0, function* () {
                 yield this.GenerateApiKeyAsync();
             }));
         }
-        // Add Button Click Event Listener
         if (this.btnTest) {
             this.btnTest.addEventListener('click', (event) => __awaiter(this, void 0, void 0, function* () {
                 yield this.TestAsync();
@@ -82,6 +74,5 @@ class Api {
         }
     }
 }
-// Create Instance
 const apiInstance = new Api();
 //# sourceMappingURL=api.js.map

@@ -1,4 +1,5 @@
 using System.Data;
+
 using Npgsql;
 
 using Dashboard.Models.Data;
@@ -6,15 +7,13 @@ using Dashboard.Models.Utility;
 
 namespace Dashboard.Models.Service;
 
-class BatchlogAccess(PostgresqlWorker worker)
-{
+class BatchlogAccess(PostgresqlWorker worker) {
     // ------------------------------------------------
     // Field
     // ------------------------------------------------
-    private readonly Logger? _logger = Logger.GetInstance();
     private PostgresqlWorker Worker { get; set; } = worker;
     private string sql = string.Empty;
-    private Dictionary<string, dynamic> prms = [];
+    private List<IDatabaseWorker.Parameter> prms = [];
 
     // ------------------------------------------------
     // Function : Select
@@ -43,7 +42,7 @@ class BatchlogAccess(PostgresqlWorker worker)
             sql += """
                 and uuid = @uuid
             """;
-            PostgresqlWorker.AddParameter(ref prms, "@uuid", DbType.String, uuid);
+            prms.Add(new IDatabaseWorker.Parameter("@uuid", uuid, DbType.String));
         }
         if (keyword is not null) {
             sql += """
@@ -52,16 +51,20 @@ class BatchlogAccess(PostgresqlWorker worker)
                     or program_name like @keyword
                 )
             """;
-            PostgresqlWorker.AddParameter(ref prms, "@keyword", DbType.String, keyword);
+            prms.Add(new IDatabaseWorker.Parameter("@keyword", keyword, DbType.String));
         }
         if (status is not null) {
             sql += """
                 and status = @status
             """;
-            PostgresqlWorker.AddParameter(ref prms, "@status", DbType.String, status);
+            prms.Add(new IDatabaseWorker.Parameter("@status", status, DbType.String));
         }
+        sql += """
+            order by
+                start_time desc
+            """;
         // Execute SQL
-        using (NpgsqlDataReader reader = Worker.ExecuteSqlGetData(sql, prms)) {
+        using (NpgsqlDataReader reader = (NpgsqlDataReader)Worker.ExecuteSqlGetData(sql, prms)) {
             while (reader.Read()) {
                 BatchlogMain data = new(
                     reader["uuid"].ToString() ?? "",

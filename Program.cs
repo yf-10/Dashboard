@@ -1,14 +1,14 @@
-using Dashboard.Controllers;
 using Microsoft.AspNetCore.Authentication;
+
+using Dashboard.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();
-builder.Services
-            .AddAuthentication("Api")
-            .AddScheme<AuthenticationSchemeOptions, AuthHandler>("Api", options => { });
+builder.Services.AddAuthentication("Api") // Add authentication handler.
+                .AddScheme<AuthenticationSchemeOptions, AuthHandler>("Api", options => { });
 
 // Add session.
 builder.Services.AddSession(options => {

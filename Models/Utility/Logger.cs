@@ -3,48 +3,37 @@ using System.Text.RegularExpressions;
 
 namespace Dashboard.Models.Utility;
 
-public class Logger
-{
-    // ------------------------------------------------
-    // Field
-    // ------------------------------------------------
+public class Logger {
     private enum Level { ERROR, WARN, INFO, DEBUG }
-    private static Logger? _singleton = null;
-    private StreamWriter? _stream = null;
-    private readonly object _lockObj = new();
 
-    // ------------------------------------------------
-    // Field : Configuration
-    // ------------------------------------------------
-    private static bool isFileOutput = true;
-    private static int level;
-    private static string dirPath = string.Empty;
-    private static string fileName = string.Empty;
-    private static string filePath = string.Empty;
-    private static int fileMaxSize;
-    private static int filePeriod;
+    private static Logger?  singleton = null;
+    private StreamWriter?   stream = null;
+    private readonly object lockObj = new();
 
-    // ------------------------------------------------
-    // Get Instance
-    // ------------------------------------------------
+    private static bool     isFileOutput    = true;
+    private static int      logLevel        = (int)Level.INFO;
+    private static string   logDirPath      = "./logs";
+    private static string   logFileName     = "app";
+    private static string   logFilePath     = string.Empty;
+    private static int      logFileMaxSize  = 10485760;
+    private static int      logFilePeriod   = 180;
+
     public static Logger GetInstance(IConfiguration conf) {
-        if (_singleton is null) {
-            // Load configurations
+        if (singleton is null) {
             var section = conf.GetSection("LoggerConfig");
-            isFileOutput    = section.GetValue<bool>("isFileOutput", false);
-            level           = section.GetValue<int>("level", 2);
-            dirPath         = section.GetValue<string>("dirPath", "./logs") ?? "./logs";
-            fileName        = section.GetValue<string>("fileName", "app") ?? "app";
-            fileMaxSize     = section.GetValue<int>("fileMaxSize", 10485760);
-            filePeriod      = section.GetValue<int>("filePeriod", 180);
-            filePath        = Path.Combine(dirPath, fileName + ".log");
-            // Create instance
-            _singleton = new Logger();
+            isFileOutput        = section.GetValue<bool>("isFileOutput", isFileOutput);
+            logLevel            = section.GetValue<int>("logLevel", logLevel);
+            logDirPath          = section.GetValue<string>("logDirPath", logDirPath) ?? logDirPath;
+            logFileName         = section.GetValue<string>("logFileName", logFileName) ?? logFileName;
+            logFileMaxSize      = section.GetValue<int>("logFileMaxSize", logFileMaxSize);
+            logFilePeriod       = section.GetValue<int>("logFilePeriod", logFilePeriod);
+            logFilePath         = Path.Combine(logDirPath, logFileName + ".log");
+            singleton = new Logger();
         }
-        return _singleton;
+        return singleton;
     }
     public static Logger? GetInstance() {
-        return _singleton;
+        return singleton;
     }
 
     // ------------------------------------------------
@@ -52,7 +41,7 @@ public class Logger
     // ------------------------------------------------
     private Logger() {
         if (isFileOutput) {
-            CreateLogfile(new FileInfo(filePath));
+            CreateLogfile(new FileInfo(logFilePath));
         }
     }
 
@@ -60,12 +49,12 @@ public class Logger
     // 0 : ERROR
     // ------------------------------------------------
     public void Error(string msg) {
-        if ((int)Level.ERROR <= level) {
+        if ((int)Level.ERROR <= logLevel) {
             Out(Level.ERROR, msg);
         }
     }
     public void Error(Exception ex) {
-        if ((int)Level.ERROR <= level) {
+        if ((int)Level.ERROR <= logLevel) {
             Out(Level.ERROR, ex.Message + Environment.NewLine + ex.StackTrace);
         }
     }
@@ -74,7 +63,7 @@ public class Logger
     // 1 : WARN
     // ------------------------------------------------
     public void Warn(string msg) {
-        if ((int)Level.WARN <= level) {
+        if ((int)Level.WARN <= logLevel) {
             Out(Level.WARN, msg);
         }
     }
@@ -83,7 +72,7 @@ public class Logger
     // 2 : INFO
     // ------------------------------------------------
     public void Info(string msg) {
-        if ((int)Level.INFO <= level) {
+        if ((int)Level.INFO <= logLevel) {
             Out(Level.INFO, msg);
         }
     }
@@ -92,7 +81,7 @@ public class Logger
     // 3 : DEBUG
     // ------------------------------------------------
     public void Debug(string msg) {
-        if ((int)Level.DEBUG <= level) {
+        if ((int)Level.DEBUG <= logLevel) {
             Out(Level.DEBUG, msg);
         }
     }
@@ -109,18 +98,16 @@ public class Logger
             level.ToString().PadRight(5, ' '),
             msg
         );
-        if (isFileOutput) {
-            // [File]
-            lock (_lockObj) {
-                _stream?.WriteLine(line);
-                FileInfo logFile = new(filePath);
-                if (fileMaxSize < logFile.Length) {
+        if (isFileOutput) { // FILE
+            lock (lockObj) {
+                stream?.WriteLine(line);
+                FileInfo logFile = new(logFilePath);
+                if (logFileMaxSize < logFile.Length) {
                     ArchiveLogFile();
                     DeleteOldLogFile();
                 }
             }
-        } else {
-            // [Console]
+        } else { // CONSOLE
             Console.WriteLine(line);
         }
     }
@@ -129,14 +116,12 @@ public class Logger
     // Create log file
     // ------------------------------------------------
     private void CreateLogfile(FileInfo logFile) {
-        // Create directory if not exists
         if (logFile.DirectoryName is not null) {
-            if (!Directory.Exists(logFile.DirectoryName)) {
+            if (Directory.Exists(logFile.DirectoryName) == false) {
                 Directory.CreateDirectory(logFile.DirectoryName);
             }
         }
-        // Create log file (UTF-8)
-        _stream = new StreamWriter(logFile.FullName, true, Encoding.UTF8) {
+        stream = new StreamWriter(logFile.FullName, true, Encoding.UTF8) {
             AutoFlush = true
         };
     }
@@ -145,10 +130,10 @@ public class Logger
     // Archive log file
     // ------------------------------------------------
     private void ArchiveLogFile() {
-        string archiveFileName = string.Concat(fileName, "_", DateTime.Now.ToString("yyyyMMddHHmmss"), ".log");
-        string archiveFilePath = Path.Combine(dirPath, archiveFileName);
-        File.Move(filePath, archiveFilePath);
-        CreateLogfile(new FileInfo(filePath));
+        string archiveFileName = string.Concat(logFileName, "_", DateTime.Now.ToString("yyyyMMddHHmmss"), ".log");
+        string archiveFilePath = Path.Combine(logDirPath, archiveFileName);
+        File.Move(logFilePath, archiveFilePath);
+        CreateLogfile(new FileInfo(logFilePath));
     }
 
     // ------------------------------------------------
@@ -156,15 +141,15 @@ public class Logger
     // ------------------------------------------------
     private void DeleteOldLogFile() {
         // Specified file name "[filename]_yyyyMMddHHmmss.log"
-        Regex regex = new(fileName + @"_(\d{14}).*\.log");
-        DateTime retentionDate = DateTime.Today.AddDays(-filePeriod);
-        string[] filePathList = Directory.GetFiles(dirPath, fileName + "_*.log", SearchOption.TopDirectoryOnly);
+        Regex regex = new(logFileName + @"_(\d{14}).*\.log");
+        DateTime retentionDate = DateTime.Today.AddDays(-logFilePeriod);
+        string[] filePathList = Directory.GetFiles(logDirPath, logFileName + "_*.log", SearchOption.TopDirectoryOnly);
         foreach (string filePath in filePathList) {
             Match match = regex.Match(filePath);
             if (match.Success) {
                 DateTime logCreatedDate = DateTime.ParseExact(match.Groups[1].Value.ToString(), "yyyyMMddHHmmss", null);
                 if (logCreatedDate < retentionDate) {
-                    Info("Delete old log file: " + filePath);
+                    Info("Delete log file: " + filePath);
                     File.Delete(filePath);
                 }
             }

@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Batch";
+}
+
+@model Dashboard.Models.ViewModel.BatchViewModel
+
+<div class="container-fluid px-4">
+    <h5 class="mt-4 mb-4">Batch Manager</h5>
+
+    <!-- Batchlogs -->
+    <p class="text-secondary fs-6">History</p>
+    <div class="row">
+        <div class="col-xl-12 col-md-12 col-sm-12">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>UUID</th>
+                        <th>Status</th>
+                        <th>Program ID</th>
+                        <th>Program Name</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(BatchlogMain batchlog in Model.Batchlogs) {
+                        <tr>
+                            <td>@(batchlog.Uuid)</td>
+                            <td>@(batchlog.Status)</td>
+                            <td>@(batchlog.ProgramId)</td>
+                            <td>@(batchlog.ProgramName)</td>
+                            <td>@(batchlog.StartTime)</td>
+                            <td>@(batchlog.EndTime)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

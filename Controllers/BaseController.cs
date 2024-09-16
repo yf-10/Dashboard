@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Http.Extensions;
+
 using System.Diagnostics;
 
 using Dashboard.Models.Utility;
 using Dashboard.Models.Data;
-using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Dashboard.Controllers;
-public class BaseController(IConfiguration conf) : Controller
-{
+public class BaseController(IConfiguration conf) : Controller {
     // ---------------------------------------------------------------------
     // Field
     // ---------------------------------------------------------------------

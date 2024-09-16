@@ -3,8 +3,7 @@ using System.Runtime.Serialization;
 namespace Dashboard.Models.Data;
 
 [DataContract]
-public class ApiResponseJson(int status, string message, int dataCount, dynamic? data)
-{
+public class ApiResponseJson(int status, string message, int dataCount, dynamic? data) {
     [DataMember]
     public int Status { get; private set; } = status;
     [DataMember]

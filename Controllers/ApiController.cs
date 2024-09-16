@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using Dashboard.Models.Utility;
 using Dashboard.Models.Service;
 using Dashboard.Models.Data;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Dashboard.Controllers;
-public class ApiController(IConfiguration conf) : BaseController(conf)
-{
+public class ApiController(IConfiguration conf) : BaseController(conf) {
     // ---------------------------------------------------------------------
     // Field
     // ---------------------------------------------------------------------

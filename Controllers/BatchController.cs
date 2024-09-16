@@ -1,17 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using Dashboard.Models.Utility;
 using Dashboard.Models.Service;
 using Dashboard.Models.Data;
-using Microsoft.AspNetCore.Authorization;
+using Dashboard.Models.ViewModel;
 
 namespace Dashboard.Controllers;
-public class BatchController(IConfiguration conf) : BaseController(conf)
-{
+public class BatchController(IConfiguration conf) : BaseController(conf) {
     // ---------------------------------------------------------------------
     // Field
     // ---------------------------------------------------------------------
     private readonly Logger _logger = Logger.GetInstance(conf);
+
+    // ---------------------------------------------------------------------
+    // [GET] /batch
+    // ---------------------------------------------------------------------
+    [HttpGet]
+    [Route("batch")]
+    public IActionResult Batch() {
+        try {
+            List<BatchlogMain>? batchlogMainList = null;
+            using (PostgresqlWorker worker = new()) {
+                BatchlogAccess batchlogAccess = new(worker);
+                batchlogMainList = batchlogAccess.Select(null, null, null);
+            }
+            BatchViewModel vm = new(batchlogMainList);
+            return View(vm);
+        } catch (Exception ex) {
+            _logger.Error(ex);
+            return RedirectToAction("Error", "Error", new { code = "500" });
+        }
+    }
 
     // ---------------------------------------------------------------------
     // [GET] /api/batchlogs
@@ -30,7 +50,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
             return Json(response);
         } catch (Exception ex) {
             _logger.Error(ex);
-            response = new ApiResponseJson(-1, "Failure", 0, ex);
+            response = new(-1, "Failure", 0, ex);
             return Json(response);
         }
     }
@@ -54,7 +74,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
             return Json(response);
         } catch (Exception ex) {
             _logger.Error(ex);
-            response = new ApiResponseJson(-1, "Failure", 0, ex);
+            response = new(-1, "Failure", 0, ex);
             return Json(response);
         }
     }
@@ -78,7 +98,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
             return Json(response);
         } catch (Exception ex) {
             _logger.Error(ex);
-            response = new ApiResponseJson(-1, "Failure", 0, ex);
+            response = new(-1, "Failure", 0, ex);
             return Json(response);
         }
     }
@@ -102,7 +122,7 @@ public class BatchController(IConfiguration conf) : BaseController(conf)
             return Json(response);
         } catch (Exception ex) {
             _logger.Error(ex);
-            response = new ApiResponseJson(-1, "Failure", 0, ex);
+            response = new(-1, "Failure", 0, ex);
             return Json(response);
         }
     }

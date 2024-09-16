@@ -3,8 +3,7 @@ using System.Runtime.Serialization;
 namespace Dashboard.Models.Data;
 
 [DataContract]
-public class ApiKey(User user, string key, string status)
-{
+public class ApiKey(User user, string key, string status) {
     [DataMember]
     public User User { get; private set; } = user;
     [DataMember]
