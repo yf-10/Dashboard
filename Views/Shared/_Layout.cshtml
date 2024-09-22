@@ -96,17 +96,29 @@
                         </li>
                         <li class="nav-item">
                             <a href="~/">
-                                <i class="fa-solid fa-gear me-2"></i>
-                                <p>設定</p>
+                                <i class="fa-solid fa-user-gear me-2"></i>
+                                <p>ユーザー設定</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/">
+                                <i class="fa-solid fa-users-gear me-2"></i>
+                                <p>共通設定</p>
                             </a>
                         </li>
                         <li class="nav-section">
-                            <h4 class="text-section">CONTACT</h4>
+                            <h4 class="text-section">OTHER</h4>
                         </li>
                         <li class="nav-item">
                             <a href="~/">
                                 <i class="fa-solid fa-comment-dots me-2"></i>
                                 <p>問い合わせ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/">
+                                <i class="fa-solid fa-lock me-2"></i>
+                                <p>管理者専用</p>
                             </a>
                         </li>
                     </ul>
@@ -339,7 +351,7 @@
             </div>
 
             <!-- Partial View -->
-            @await Html.PartialAsync("_Toast");
+            @await Html.PartialAsync("_Toast")
 
             <!-- KaiAdmin Template -->
             <script src="~/lib/kaiadmin/core/jquery-3.7.1.min.js"></script>

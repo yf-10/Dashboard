@@ -55,16 +55,16 @@
 * Plugins
    + jQueryUI
    + jQuery Scrollbar
-   + Toggle
+   - Toggle
    + Css Animate
-   + Full Calendar
-   + SweetAlert
-   + Datatables
-   + DateTimePicker
-   + Select2
-   + Tagsinput
-   + Dropzone
-   + Summernote
+   - Full Calendar
+   - SweetAlert
+   - Datatables
+   - DateTimePicker
+   - Select2
+   - Tagsinput
+   - Dropzone
+   - Summernote
 * Responsive
 * 404
 * Login & Register
@@ -446,7 +446,7 @@ body {
     padding-right: 2rem;
     padding-left: 2rem; } }
 .page-inner {
-  padding: 24px 0; }
+  padding: 15px 0; }
 
 @media (min-width: 576px) {
   .page-inner {
@@ -5997,7 +5997,7 @@ label.error {
     .footer > .container-fluid .copyright, .footer > .container .copyright {
       margin-left: 0 !important;
       margin-top: 10px;
-      margin-bottom: 15px; } }
+      margin-bottom: 10px; } }
 @media screen and (max-width: 576px) {
   .container, .container-full {
     padding: 0 !important; }
