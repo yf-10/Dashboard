@@ -2,44 +2,161 @@
     ViewData["Title"] = "Welcome";
 }
 
-<div class="container-fluid px-4">
-    <h1 class="mt-4 mb-4">Welcome</h1>
+<div class="page-header">
+    <h3 class="fw-bold mb-3">Welcome To XXX</h3>
+@* 
+    <ul class="breadcrumbs mb-3">
+        <li class="nav-home"><a href="#"><i class="fa-solid fa-house"></i></a></li>
+        <li class="separator"><i class="fa-solid fa-caret-right"></i></li>
+        <li class="nav-item"><a href="#">Base</a></li>
+        <li class="separator"><i class="fa-solid fa-caret-right"></i></li>
+        <li class="nav-item"><a href="#">Buttons</a></li>
+    </ul>
+ *@
+</div>
 
-    <!-- CONTROL -->
-    <p class="text-secondary fs-6">Control</p>
-    <div class="row">
-        <div class="col-xl-3 col-md-4 col-sm-6">
-            <div class="card bg-danger text-white mb-4">
-                <div class="card-body">API</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="~/api">View Detail</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+<!-- MENU -->
+<p class="text-gray fs-6">MENU</p>
+@* <div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card card-stats card-danger card-round shadow">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="icon-big text-center">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <h4 class="card-title">新規発行</h4>
+                            <a class="stretched-link" href="~/api"><p class="card-category">New DDD</p></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- ACTION -->
-    <p class="text-secondary fs-6">Action</p>
-    <div class="row">
-        <div class="col-xl-3 col-md-4 col-sm-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="card-body">Batch</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="~/batch">View Detail</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-4 col-sm-6">
-            <div class="card bg-primary text-white mb-4">
-                <div class="card-body">日本語てすと</div>
-                <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="~/batch">あいうえお漢字はこんな</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card card-stats card-primary card-round shadow">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="icon-big text-center">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    <div class="col-7 col-stats">
+                        <div class="numbers">
+                            <h4 class="card-title">検索</h4>
+                            <a class="stretched-link" href="~/api">
+                                <p class="card-category">Search DDD</p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+ *@
 
+ 
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center text-light icon-danger shadow-sm">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+                    </div>
+                    <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="">
+                            <h4 class="card-title">新規発行</h4>
+                            <a class="stretched-link" href="~/api">
+                                <p class="card-category">Publish</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center text-light icon-primary shadow-sm">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="">
+                            <h4 class="card-title">検索</h4>
+                            <a class="stretched-link" href="~/api">
+                                <p class="card-category">Search</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- SETTING -->
+<p class="text-gray fs-6">SETTING</p>
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center text-light icon-black shadow-sm">
+                            <i class="fa-solid fa-gear"></i>
+                        </div>
+                    </div>
+                    <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="">
+                            <h4 class="card-title">設定</h4>
+                            <a class="stretched-link" href="~/api">
+                                <p class="card-category">Setting</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- OTHER -->
+<p class="text-gray fs-6">OTHER</p>
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center text-light icon-secondary shadow-sm">
+                            <i class="fa-solid fa-comment-dots"></i>
+                        </div>
+                    </div>
+                    <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="">
+                            <h4 class="card-title">問い合わせ</h4>
+                            <a class="stretched-link" href="~/api">
+                                <p class="card-category">Contact</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

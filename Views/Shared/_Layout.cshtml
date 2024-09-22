@@ -1,156 +1,367 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Data -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="This is yf-10's dashboard!!" />
     <meta name="author" content="yf-10" />
-
-    <!-- Title -->
     <title>@ViewData["Title"] - Dashboard</title>
 
     <!-- Favicon -->
-    <link href="~/img/17507_color.svg" rel="icon" type="image/svg+xml">
+    <link rel="icon" href="~/img/17507_color.svg" type="image/svg+xml">
 
-    <!-- Cascading Style Sheet Bootstrap5 -->
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- KaiAdmin Template -->
+    <link rel="stylesheet" href="~/lib/kaiadmin/core/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/kaiadmin/plugin/jquery.ui.css" />
+    <link rel="stylesheet" href="~/lib/kaiadmin/plugin//jquery.scrollbar.css" />
+    <link rel="stylesheet" href="~/lib/kaiadmin/plugin/jquery.magnific-popup.css" />
+    <link rel="stylesheet" href="~/lib/kaiadmin/plugin/animate.css" />
+    <link rel="stylesheet" href="~/lib/kaiadmin/plugin/glide.css" />
+    <link rel="stylesheet" href="~/lib/kaiadmin/kaiadmin.css" />
 
-    <!-- Cascading Style Sheet Shared -->
-    <link href="~/css/shared/site.css" rel="stylesheet">
-    <link href="~/css/shared/styles.css" rel="stylesheet">
+    <!-- Flatpickr -->
+    <link rel="stylesheet" href="~/lib/flatpickr/flatpickr.min.css" />
 
-    <!-- JavaScript Fontawesome -->
+    <!-- Custom CSS Shared -->
+    @* <link rel="stylesheet" href="~/css/shared/site.css"> *@
+    @* <link rel="stylesheet" href="~/css/shared/styles.css"> *@
+
+    <!-- FontAwesome 6 -->
     <script src="~/lib/fontawesome/fontawesome-6.3.0.all.js"></script>
 
 </head>
+<body>
+    <!-- Whole Wrapper -->
+    <div class="wrapper">
 
-<body class="sb-nav-fixed">
+        <!-- Sidebar -->
+        <div class="sidebar" data-background-color="dark">
 
-    <!-- TopBar -->
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <!-- Brand Logo -->
-        <a class="navbar-brand ps-3" href="~/">
-            <span>Dashboard</span>
-        </a>
-        <!-- Sidebar Toggle # -->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
-            <i class="fas fa-bars"></i>
-        </button>
-        <!-- Search -->
-        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            <div class="sidebar-logo">
+                <div class="logo-header" data-background-color="dark">
+                    <!-- Title logo -->
+                    <a href="index.html" class="logo">
+                        <img src="~/lib/kaiadmin/img/logo_dark.png"
+                             alt="navbar brand"
+                             class="navbar-brand me-2"
+                             height="20" />
+                        @* <span class="text-light fs-4 fw-bold">DPR WEB</span> *@
+                    </a>
+                    <!-- Sidebar Open/Close Toggle -->
+                    <div class="nav-toggle">
+                        <button class="btn btn-toggle toggle-sidebar">
+                            <i class="gg-menu-right"></i>
+                        </button>
+                        <button class="btn btn-toggle sidenav-toggler">
+                            <i class="gg-menu-left"></i>
+                        </button>
+                    </div>
+                    <button class="topbar-toggler more">
+                        <i class="gg-more-vertical-alt"></i>
+                    </button>
+                </div>
             </div>
-        </form>
-        <!-- Navigation -->
-        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                    <li><hr class="dropdown-divider" /></li>
-                    <li><a class="dropdown-item" href="#!">Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <!-- /TopBar -->
 
-    <div id="layoutSidenav">
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    <ul class="nav nav-secondary">
+                        <li class="nav-section">
+                            <h4 class="text-section">HOME</h4>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="~/">
+                                <i class="fa-solid fa-door-open me-2"></i>
+                                <p>Welcome To XXX</p>
+                            </a>
+                        </li>
+                        <li class="nav-section">
+                            <h4 class="text-section">MENU</h4>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/">
+                                <i class="fa-solid fa-pen-to-square me-2"></i>
+                                <p>新規発行</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/">
+                                <i class="fa-solid fa-magnifying-glass me-2"></i>
+                                <p>検索</p>
+                            </a>
+                        </li>
+                        <li class="nav-section">
+                            <h4 class="text-section">SETTING</h4>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/">
+                                <i class="fa-solid fa-gear me-2"></i>
+                                <p>設定</p>
+                            </a>
+                        </li>
+                        <li class="nav-section">
+                            <h4 class="text-section">CONTACT</h4>
+                        </li>
+                        <li class="nav-item">
+                            <a href="~/">
+                                <i class="fa-solid fa-comment-dots me-2"></i>
+                                <p>問い合わせ</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-        <!-- SideBar -->
-        <div id="layoutSidenav_nav">
-            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                <div class="sb-sidenav-menu">
-                    <div class="nav">
-                        <!-- HOME -->
-                        <div class="sb-sidenav-menu-heading">HOME</div>
-                        <a class="nav-link" href="~/">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-door-open"></i></div>
-                            Welcome
-                        </a>
-                        <!-- CONTROL -->
-                        <div class="sb-sidenav-menu-heading">CONTROL</div>
-                        <a class="nav-link" href="~/api">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-key"></i></div>
-                            API
-                        </a>
-                        <!-- ACTION -->
-                        <div class="sb-sidenav-menu-heading">ACTION</div>
-                        <a class="nav-link" href="~/batch">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-microchip"></i></div>
-                            Batch
-                        </a>
-                        <!-- ACTION -->
-                        <div class="sb-sidenav-menu-heading">ACTION</div>
-                        <a class="nav-link" href="~/batch">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-microchip"></i></div>
-                            てすと
-                        </a>
-                        @*
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-microchip"></i></div>
-                            Batch
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">
-                                    <i class="fa-solid fa-file-import me-2"></i>Data Import
+        <!-- Main Panel -->
+        <div class="main-panel">
+            <div class="main-header">
+                <div class="main-header-logo">
+                    <!-- Logo Header -->
+                    <div class="logo-header" data-background-color="dark"></div>
+                </div>
+                <!-- Navbar Header -->
+                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" data-background-color="dark">
+                    <div class="container-fluid">
+                        <nav class="navbar navbar-header-left navbar-expand-lg navbar-form">
+                            <button type="button" class="btn btn-outline-light">
+                                <i class="fa-solid fa-pen-to-square me-1"></i>新規発行</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-light ms-3">
+                                <i class="fa-solid fa-floppy-disk me-1"></i>下書き保存
+                            </button>
+                            <button type="button" class="btn btn-outline-danger ms-3">
+                                <i class="fa-solid fa-xmark me-1"></i>中止
+                            </button>
+                        </nav>
+                        <!--
+                        <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex ms-3">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <button type="submit" class="btn btn-search pe-1">
+                                <i class="fa fa-search search-icon"></i>
+                              </button>
+                            </div>
+                            <input
+                              type="text"
+                              placeholder="Search ..."
+                              class="form-control"
+                            />
+                          </div>
+                        </nav>
+                        -->
+                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                            <!-- Quick Search -->
+                            <li class="nav-item topbar-icon dropdown hidden-caret">
+                                <a class="nav-link dropdown-toggle"
+                                   data-bs-toggle="dropdown"
+                                   href="#"
+                                   role="button"
+                                   aria-expanded="false"
+                                   aria-haspopup="true">
+                                    <i class="fa fa-search"></i>
                                 </a>
-                            </nav>
+                                <ul class="dropdown-menu dropdown-search animated fadeIn">
+                                    <form class="navbar-left navbar-form nav-search">
+                                        <div class="input-group">
+                                            <input type="text"
+                                                   placeholder="Quick Search"
+                                                   class="form-control" />
+                                        </div>
+                                    </form>
+                                </ul>
+                            </li>
+                            <!-- Shortcut -->
+                            <li class="nav-item topbar-icon dropdown hidden-caret">
+                                <a class="nav-link"
+                                   data-bs-toggle="dropdown"
+                                   href="#"
+                                   aria-expanded="false">
+                                    <i class="fas fa-layer-group"></i>
+                                </a>
+                                <!-- Shortcut Dropdown Item -->
+                                <div class="dropdown-menu quick-actions animated fadeIn">
+                                    <div class="quick-actions-header">
+                                        <span class="title mb-1">ショートカット</span>
+                                        <span class="subtitle op-7">Quick Actions</span>
+                                    </div>
+                                    <div class="quick-actions-scroll scrollbar-outer">
+                                        <div class="quick-actions-items">
+                                            <div class="row m-0">
+                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                    <div class="quick-actions-item">
+                                                        <div class="avatar-item bg-danger rounded-circle">
+                                                            <i class="far fa-calendar-alt"></i>
+                                                        </div>
+                                                        <span class="text">Calendar</span>
+                                                    </div>
+                                                </a>
+                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                    <div class="quick-actions-item">
+                                                        <div class="avatar-item bg-warning rounded-circle">
+                                                            <i class="fas fa-map"></i>
+                                                        </div>
+                                                        <span class="text">Maps</span>
+                                                    </div>
+                                                </a>
+                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                    <div class="quick-actions-item">
+                                                        <div class="avatar-item bg-info rounded-circle">
+                                                            <i class="fas fa-file-excel"></i>
+                                                        </div>
+                                                        <span class="text">Reports</span>
+                                                    </div>
+                                                </a>
+                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                    <div class="quick-actions-item">
+                                                        <div class="avatar-item bg-success rounded-circle">
+                                                            <i class="fas fa-envelope"></i>
+                                                        </div>
+                                                        <span class="text">Emails</span>
+                                                    </div>
+                                                </a>
+                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                    <div class="quick-actions-item">
+                                                        <div class="avatar-item bg-primary rounded-circle">
+                                                            <i class="fas fa-file-invoice-dollar"></i>
+                                                        </div>
+                                                        <span class="text">Invoice</span>
+                                                    </div>
+                                                </a>
+                                                <a class="col-6 col-md-4 p-0" href="#">
+                                                    <div class="quick-actions-item">
+                                                        <div class="avatar-item bg-secondary rounded-circle">
+                                                            <i class="fas fa-credit-card"></i>
+                                                        </div>
+                                                        <span class="text">Payments</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- Release Note -->
+                            <li class="nav-item topbar-icon dropdown hidden-caret">
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   id="notifDropdown"
+                                   role="button"
+                                   data-bs-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    <i class="fa fa-bell"></i>
+                                </a>
+                                <!-- Release Note Drowdown Item -->
+                                <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
+                                    <li>
+                                        <div class="dropdown-title">Release Note</div>
+                                    </li>
+                                    <li>
+                                        <div class="notif-scroll scrollbar-outer">
+                                            <div class="notif-center">
+                                                <a href="#">
+                                                    <div class="notif-icon notif-info">
+                                                        <i class="fa-solid fa-lightbulb"></i>
+                                                    </div>
+                                                    <div class="notif-content">
+                                                        <span class="block">ベータ版をリリースしました</span>
+                                                        <span class="time">Version 0.0.1</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- Login User -->
+                            <li class="nav-item topbar-user dropdown hidden-caret">
+                                <a class="dropdown-toggle profile-pic"
+                                   href="#"
+                                   data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <i class="fa fa-user d-block d-lg-none"></i>
+                                    <span class="profile-username">
+                                        <span class="op-7 me-1">12345</span>
+                                        <span class="fw-bold">藤野　佑亮</span>
+                                    </span>
+                                </a>
+                                <!-- Login User Dropwodn Item -->
+                                <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
+                                    <li>
+                                        <div class="dropdown-title">Account</div>
+                                    </li>
+                                    <li>
+                                        <div class="notif-scroll scrollbar-outer">
+                                            <div class="notif-center">
+                                                <a href="javascript:void(0);">
+                                                    <div class="notif-icon notif-primary">
+                                                        <i class="fa-solid fa-id-card"></i>
+                                                    </div>
+                                                    <div class="notif-content">
+                                                        <span class="block">藤野　佑亮</span>
+                                                        <span class="time">技開・技ＳＰ・インテグレーション・ＳＳ</span>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a class="see-all" href="javascript:void(0);">
+                                            Logout<i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="container">
+                <div class="page-inner">
+                    <!-- Page Content -->
+                    <main>
+                        @RenderBody()
+                    </main>
+
+                    <!-- Footer -->
+                    <footer class="footer">
+                        <div class="container-fluid d-flex justify-content-between">
+                            <div class="copyright text-gray">
+                                Copyright &copy; Y.Fujino 2024
+                            </div>
                         </div>
-                        *@
-                    </div>
+                    </footer>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">
-                        <i class="fa-solid fa-code-commit me-1"></i>Version 1.0
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <!-- /SideBar -->
+            </div>
 
-        <div id="layoutSidenav_content">
+            <!-- Partial View -->
+            @await Html.PartialAsync("_Toast");
 
-            <!-- Page Content -->
-            <main>
-                @RenderBody()
-            </main>
-            <!-- /Page Content -->
+            <!-- KaiAdmin Template -->
+            <script src="~/lib/kaiadmin/core/jquery-3.7.1.min.js"></script>
+            <script src="~/lib/kaiadmin/core/popper.min.js"></script>
+            <script src="~/lib/kaiadmin/core/bootstrap.min.js"></script>
+            <script src="~/lib/kaiadmin/plugin/jquery.scrollbar.min.js"></script>
+            <script src="~/lib/kaiadmin/plugin/jquery.magnific-popup.min.js"></script>
+            <script src="~/lib/kaiadmin/kaiadmin.js"></script>
 
-            <!-- Footer -->
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Y.Fujino 2024</div>
-                    </div>
-                </div>
-            </footer>
-            <!-- /Footer -->
+            <!-- Flatpickr -->
+            <script src="~/lib/flatpickr/flatpickr.js"></script>
+
+            <!-- Custom JavaScript Shared -->
+            <script src="~/js/shared/site.js"></script>
+            <script src="~/js/shared/scripts.js"></script>
+            <script src="~/js/shared/toast.js"></script>
+
+            <!-- Custom JavaScript Page Content -->
+            @await RenderSectionAsync("Scripts", required: false)
 
         </div>
-
     </div>
-
-    <!-- Partial View -->
-    @await Html.PartialAsync("_Toast");
-
-    <!-- JavaScript Bootstrap5 -->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- JavaScript Original Shared -->
-    <script src="~/js/shared/site.js"></script>
-    <script src="~/js/shared/scripts.js"></script>
-    <script src="~/js/shared/toast.js"></script>
-
-    <!-- JavaScript Page Content -->
-    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>
