@@ -97,9 +97,9 @@ class BatchlogAccess(PostgresqlWorker worker) {
             """;
         foreach (BatchlogMain main in ret) {
             prms = [];
-            PostgresqlWorker.AddParameter(ref prms, "@uuid", DbType.String, main.Uuid);
+            prms.Add(new IDatabaseWorker.Parameter("@uuid", main.Uuid, DbType.String));
             // Execute SQL
-            using NpgsqlDataReader reader = Worker.ExecuteSqlGetData(sql, prms);
+            using NpgsqlDataReader reader = (NpgsqlDataReader)Worker.ExecuteSqlGetData(sql, prms);
             while (reader.Read()) {
                 BatchlogDetail data = new(
                     reader["uuid"].ToString() ?? "",
@@ -156,12 +156,12 @@ class BatchlogAccess(PostgresqlWorker worker) {
             """;
         // Set Parameters
         prms = [];
-        PostgresqlWorker.AddParameter(ref prms, "@uuid", DbType.String, guid.ToString());
-        PostgresqlWorker.AddParameter(ref prms, "@status", DbType.String, status);
-        PostgresqlWorker.AddParameter(ref prms, "@program_id", DbType.String, programId);
-        PostgresqlWorker.AddParameter(ref prms, "@program_name", DbType.String, programName);
-        PostgresqlWorker.AddParameter(ref prms, "@created_by", DbType.String, user.Name);
-        PostgresqlWorker.AddParameter(ref prms, "@updated_by", DbType.String, user.Name);
+        prms.Add(new IDatabaseWorker.Parameter("@uuid", guid.ToString(), DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@status", status, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@program_id", programId, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@program_name", programName, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@created_by", user.Name, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@updated_by", user.Name, DbType.String));
         // Execute SQL
         Worker.ExecuteSql(sql, prms);
         // ------------------------------------
@@ -238,11 +238,11 @@ class BatchlogAccess(PostgresqlWorker worker) {
             """;
         // Set Parameters
         prms = [];
-        PostgresqlWorker.AddParameter(ref prms, "@uuid", DbType.String, uuid);
-        PostgresqlWorker.AddParameter(ref prms, "@log_no", DbType.Int64, logNo);
-        PostgresqlWorker.AddParameter(ref prms, "@log_msg", DbType.String, logMsg);
-        PostgresqlWorker.AddParameter(ref prms, "@created_by", DbType.String, user.Name);
-        PostgresqlWorker.AddParameter(ref prms, "@updated_by", DbType.String, user.Name);
+        prms.Add(new IDatabaseWorker.Parameter("@uuid", uuid, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@log_no", logNo, DbType.Int64));
+        prms.Add(new IDatabaseWorker.Parameter("@log_msg", logMsg, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@created_by", user.Name, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@updated_by", user.Name, DbType.String));
         // Execute SQL
         Worker.ExecuteSql(sql, prms);
         return uuid;
@@ -267,9 +267,9 @@ class BatchlogAccess(PostgresqlWorker worker) {
             """;
         // Set Parameters
         prms = [];
-        PostgresqlWorker.AddParameter(ref prms, "@uuid", DbType.String, uuid);
-        PostgresqlWorker.AddParameter(ref prms, "@status", DbType.String, status);
-        PostgresqlWorker.AddParameter(ref prms, "@updated_by", DbType.String, user.Name);
+        prms.Add(new IDatabaseWorker.Parameter("@uuid", uuid, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@status", status, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@updated_by", user.Name, DbType.String));
         // Execute SQL
         Worker.ExecuteSql(sql, prms);
         return;
@@ -293,8 +293,8 @@ class BatchlogAccess(PostgresqlWorker worker) {
             """;
         // Set Parameters
         prms = [];
-        PostgresqlWorker.AddParameter(ref prms, "@uuid", DbType.String, uuid);
-        PostgresqlWorker.AddParameter(ref prms, "@updated_by", DbType.String, user.Name);
+        prms.Add(new IDatabaseWorker.Parameter("@uuid", uuid, DbType.String));
+        prms.Add(new IDatabaseWorker.Parameter("@updated_by", user.Name, DbType.String));
         // Execute SQL
         Worker.ExecuteSql(sql, prms);
         return;
@@ -319,9 +319,9 @@ class BatchlogAccess(PostgresqlWorker worker) {
                 uuid
             """;
         prms = [];
-        PostgresqlWorker.AddParameter(ref prms, "@uuid", DbType.String, uuid);
+        prms.Add(new IDatabaseWorker.Parameter("@uuid", uuid, DbType.String));
         // Execute SQL
-        using NpgsqlDataReader reader = Worker.ExecuteSqlGetData(sql, prms);
+        using NpgsqlDataReader reader = (NpgsqlDataReader)Worker.ExecuteSqlGetData(sql, prms);
         while (reader.Read()) {
             logNo = int.Parse(reader["max_log_no"].ToString() ?? "0");
             break;

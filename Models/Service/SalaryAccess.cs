@@ -13,7 +13,7 @@ class SalaryAccess(PostgresqlWorker worker) {
     // ------------------------------------------------
     private PostgresqlWorker Worker { get; set; } = worker;
     private string sql = string.Empty;
-    private Dictionary<string, dynamic> prms = [];
+    private List<IDatabaseWorker.Parameter> prms = [];
 
     // ------------------------------------------------
     // Function : Select
@@ -39,16 +39,16 @@ class SalaryAccess(PostgresqlWorker worker) {
             sql += """
                 and month = @month
             """;
-            PostgresqlWorker.AddParameter(ref prms, "@month", DbType.String, month);
+            prms.Add(new IDatabaseWorker.Parameter("@month", month, DbType.String));
         }
         if (keyword is not null) {
             sql += """
                 and payment_item = @keyword
             """;
-            PostgresqlWorker.AddParameter(ref prms, "@keyword", DbType.String, keyword);
+            prms.Add(new IDatabaseWorker.Parameter("@keyword", keyword, DbType.String));
         }
         // Execute SQL
-        using NpgsqlDataReader reader = Worker.ExecuteSqlGetData(sql, prms);
+        using NpgsqlDataReader reader = (NpgsqlDataReader)Worker.ExecuteSqlGetData(sql, prms);
         while (reader.Read()) {
             Salary data = new(
                 reader["month"].ToString() ?? "",
@@ -106,14 +106,14 @@ class SalaryAccess(PostgresqlWorker worker) {
         salaries.ForEach(salary => {
             prms = [];
             // Add Parameters
-            PostgresqlWorker.AddParameter(ref prms, "@created_by", DbType.String, user.Name);
-            PostgresqlWorker.AddParameter(ref prms, "@updated_by", DbType.String, user.Name);
-            PostgresqlWorker.AddParameter(ref prms, "@exclusive_flag", DbType.Int64, 0);
-            PostgresqlWorker.AddParameter(ref prms, "@month", DbType.String, salary.Month);
-            PostgresqlWorker.AddParameter(ref prms, "@deduction", DbType.Boolean, salary.Deduction);
-            PostgresqlWorker.AddParameter(ref prms, "@payment_item", DbType.String, salary.PaymentItem);
-            PostgresqlWorker.AddParameter(ref prms, "@amount", DbType.Int64, salary.Money.Amount);
-            PostgresqlWorker.AddParameter(ref prms, "@currency_code", DbType.String, salary.Money.CurrencyCode);
+            prms.Add(new IDatabaseWorker.Parameter("@created_by", user.Name, DbType.String));
+            prms.Add(new IDatabaseWorker.Parameter("@updated_by", user.Name, DbType.String));
+            prms.Add(new IDatabaseWorker.Parameter("@exclusive_flag", 0, DbType.Int64));
+            prms.Add(new IDatabaseWorker.Parameter("@month", salary.Month, DbType.String));
+            prms.Add(new IDatabaseWorker.Parameter("@deduction", salary.Deduction, DbType.Boolean));
+            prms.Add(new IDatabaseWorker.Parameter("@payment_item", salary.PaymentItem, DbType.String));
+            prms.Add(new IDatabaseWorker.Parameter("@amount", salary.Money.Amount, DbType.Int64));
+            prms.Add(new IDatabaseWorker.Parameter("@currency_code", salary.Money.CurrencyCode, DbType.String));
             // Execute SQL
             int insertedCount = Worker.ExecuteSql(sql, prms);
             if (insertedCount > 0) count++;
