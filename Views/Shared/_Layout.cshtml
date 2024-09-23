@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿<!--
+=========================================================
+* Material Dashboard 2 - v3.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,356 +38,341 @@
     <!-- Flatpickr -->
     <link rel="stylesheet" href="~/lib/flatpickr/flatpickr.min.css" />
 
-    <!-- Custom CSS Shared -->
-    @* <link rel="stylesheet" href="~/css/shared/site.css"> *@
-    @* <link rel="stylesheet" href="~/css/shared/styles.css"> *@
+    <!-- Material Dashboard Template -->
+    <link rel="stylesheet" href="~/lib/material-dashboard/material-dashboard.css">
 
     <!-- FontAwesome 6 -->
     <script src="~/lib/fontawesome/fontawesome-6.3.0.all.js"></script>
 
 </head>
-<body>
-    <!-- Whole Wrapper -->
-    <div class="wrapper">
-
-        <!-- Sidebar -->
-        <div class="sidebar" data-background-color="dark">
-
-            <div class="sidebar-logo">
-                <div class="logo-header" data-background-color="dark">
-                    <!-- Title logo -->
-                    <a href="index.html" class="logo">
-                        <img src="~/lib/kaiadmin/img/logo_dark.png"
-                             alt="navbar brand"
-                             class="navbar-brand me-2"
-                             height="20" />
-                        @* <span class="text-light fs-4 fw-bold">DPR WEB</span> *@
+<body class="g-sidenav-show  bg-gray-200">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+                <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold text-white">XXX WEB</span>
+            </a>
+        </div>
+        <hr class="horizontal light mt-0 mb-2">
+        <div class="collapse navbar-collapse w-auto " id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">HOME</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold active bg-gradient-secondary" href="../pages/tables.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-door-open"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Welcome To XXX</span>
                     </a>
-                    <!-- Sidebar Open/Close Toggle -->
-                    <div class="nav-toggle">
-                        <button class="btn btn-toggle toggle-sidebar">
-                            <i class="gg-menu-right"></i>
-                        </button>
-                        <button class="btn btn-toggle sidenav-toggler">
-                            <i class="gg-menu-left"></i>
-                        </button>
-                    </div>
-                    <button class="topbar-toggler more">
-                        <i class="gg-more-vertical-alt"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="sidebar-wrapper scrollbar scrollbar-inner">
-                <div class="sidebar-content">
-                    <ul class="nav nav-secondary">
-                        <li class="nav-section">
-                            <h4 class="text-section">HOME</h4>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">MENU</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="../pages/dashboard.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">新規発行</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="../pages/dashboard.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">検索</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">SETTING</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="../pages/dashboard.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">ユーザー設定</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="../pages/dashboard.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">共通設定</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">OTHER</h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="../pages/dashboard.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-comment-dots"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">問い合わせ</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="../pages/dashboard.html">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">管理者専用</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-5 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+            <div class="container-fluid py-0 px-3">
+                <div class="collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4" id="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-flex align-items-center">
+                            <button type="button" class="btn btn-dark mt-3">
+                                <i class="fa-solid fa-pen-to-square fa-lg me-1"></i>新規発行
+                            </button>
+                            <button type="button" class="btn btn-dark mt-3 ms-3">
+                                <i class="fa-solid fa-floppy-disk fa-lg me-1"></i>下書き保存
+                            </button>
+                            <button type="button" class="btn btn-danger mt-3 ms-3">
+                                <i class="fa-solid fa-xmark fa-lg me-1"></i>中止
+                            </button>
                         </li>
-                        <li class="nav-item active">
-                            <a href="~/">
-                                <i class="fa-solid fa-door-open me-2"></i>
-                                <p>Welcome To XXX</p>
+                    </ul>
+                    <ul class="navbar-nav ms-auto justify-content-end">
+                        <!-- Sidebar Open/Close Toggle -->
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="fa-solid fa-bars fa-xl"></i>
+                                </div>
                             </a>
                         </li>
-                        <li class="nav-section">
-                            <h4 class="text-section">MENU</h4>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/">
-                                <i class="fa-solid fa-pen-to-square me-2"></i>
-                                <p>新規発行</p>
+                        <!-- Notification -->
+                        <li class="nav-item dropdown pe-2 ms-3 d-flex align-items-center">
+                            <a href="" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-bell fa-xl cursor-pointer"></i>
                             </a>
+                            <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    <span class="font-weight-bold">New message</span> from Laur
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    13 minutes ago
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    <span class="font-weight-bold">New album</span> by Travis Scott
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    1 day
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                                <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <title>credit-card</title>
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                                            <g transform="translate(1716.000000, 291.000000)">
+                                                                <g transform="translate(453.000000, 454.000000)">
+                                                                    <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    Payment successfully completed
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    2 days
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="~/">
-                                <i class="fa-solid fa-magnifying-glass me-2"></i>
-                                <p>検索</p>
-                            </a>
-                        </li>
-                        <li class="nav-section">
-                            <h4 class="text-section">SETTING</h4>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/">
-                                <i class="fa-solid fa-user-gear me-2"></i>
-                                <p>ユーザー設定</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/">
-                                <i class="fa-solid fa-users-gear me-2"></i>
-                                <p>共通設定</p>
-                            </a>
-                        </li>
-                        <li class="nav-section">
-                            <h4 class="text-section">OTHER</h4>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/">
-                                <i class="fa-solid fa-comment-dots me-2"></i>
-                                <p>問い合わせ</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/">
-                                <i class="fa-solid fa-lock me-2"></i>
-                                <p>管理者専用</p>
+                        <!-- Login User -->
+                        <li class="nav-item d-flex ms-2 align-items-center">
+                            <a href="../pages/sign-in.html" class="nav-link text-body font-weight-bold px-0">
+                                <i class="fa fa-user fa-xl me-1"></i>
+                                <!-- <span class="d-sm-inline d-none">藤野　佑亮</span> -->
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </div>
+        </nav>
+        <!-- End Navbar -->
 
-        <!-- Main Panel -->
-        <div class="main-panel">
-            <div class="main-header">
-                <div class="main-header-logo">
-                    <!-- Logo Header -->
-                    <div class="logo-header" data-background-color="dark"></div>
-                </div>
-                <!-- Navbar Header -->
-                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom" data-background-color="dark">
-                    <div class="container-fluid">
-                        <nav class="navbar navbar-header-left navbar-expand-lg navbar-form">
-                            <button type="button" class="btn btn-outline-light">
-                                <i class="fa-solid fa-pen-to-square me-1"></i>新規発行
-                            </button>
-                            <button type="button" class="btn btn-outline-light ms-3">
-                                <i class="fa-solid fa-floppy-disk me-1"></i>下書き保存
-                            </button>
-                            <button type="button" class="btn btn-outline-danger ms-3">
-                                <i class="fa-solid fa-xmark me-1"></i>中止
-                            </button>
-                        </nav>
-                        <!--
-                        <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex ms-3">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <button type="submit" class="btn btn-search pe-1">
-                                <i class="fa fa-search search-icon"></i>
-                              </button>
-                            </div>
-                            <input
-                              type="text"
-                              placeholder="Search ..."
-                              class="form-control"
-                            />
-                          </div>
-                        </nav>
-                        -->
-                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                            <!-- Quick Search -->
-                            <li class="nav-item topbar-icon dropdown hidden-caret">
-                                <a class="nav-link dropdown-toggle"
-                                   data-bs-toggle="dropdown"
-                                   href="#"
-                                   role="button"
-                                   aria-expanded="false"
-                                   aria-haspopup="true">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-search animated fadeIn">
-                                    <form class="navbar-left navbar-form nav-search">
-                                        <div class="input-group">
-                                            <input type="text"
-                                                   placeholder="Quick Search"
-                                                   class="form-control" />
-                                        </div>
-                                    </form>
-                                </ul>
-                            </li>
-                            <!-- Shortcut -->
-                            <li class="nav-item topbar-icon dropdown hidden-caret">
-                                <a class="nav-link"
-                                   data-bs-toggle="dropdown"
-                                   href="#"
-                                   aria-expanded="false">
-                                    <i class="fas fa-layer-group"></i>
-                                </a>
-                                <!-- Shortcut Dropdown Item -->
-                                <div class="dropdown-menu quick-actions animated fadeIn">
-                                    <div class="quick-actions-header">
-                                        <span class="title mb-1">ショートカット</span>
-                                        <span class="subtitle op-7">Quick Actions</span>
-                                    </div>
-                                    <div class="quick-actions-scroll scrollbar-outer">
-                                        <div class="quick-actions-items">
-                                            <div class="row m-0">
-                                                <a class="col-6 col-md-4 p-0" href="#">
-                                                    <div class="quick-actions-item">
-                                                        <div class="avatar-item bg-danger rounded-circle">
-                                                            <i class="far fa-calendar-alt"></i>
-                                                        </div>
-                                                        <span class="text">Calendar</span>
-                                                    </div>
-                                                </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
-                                                    <div class="quick-actions-item">
-                                                        <div class="avatar-item bg-warning rounded-circle">
-                                                            <i class="fas fa-map"></i>
-                                                        </div>
-                                                        <span class="text">Maps</span>
-                                                    </div>
-                                                </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
-                                                    <div class="quick-actions-item">
-                                                        <div class="avatar-item bg-info rounded-circle">
-                                                            <i class="fas fa-file-excel"></i>
-                                                        </div>
-                                                        <span class="text">Reports</span>
-                                                    </div>
-                                                </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
-                                                    <div class="quick-actions-item">
-                                                        <div class="avatar-item bg-success rounded-circle">
-                                                            <i class="fas fa-envelope"></i>
-                                                        </div>
-                                                        <span class="text">Emails</span>
-                                                    </div>
-                                                </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
-                                                    <div class="quick-actions-item">
-                                                        <div class="avatar-item bg-primary rounded-circle">
-                                                            <i class="fas fa-file-invoice-dollar"></i>
-                                                        </div>
-                                                        <span class="text">Invoice</span>
-                                                    </div>
-                                                </a>
-                                                <a class="col-6 col-md-4 p-0" href="#">
-                                                    <div class="quick-actions-item">
-                                                        <div class="avatar-item bg-secondary rounded-circle">
-                                                            <i class="fas fa-credit-card"></i>
-                                                        </div>
-                                                        <span class="text">Payments</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- Release Note -->
-                            <li class="nav-item topbar-icon dropdown hidden-caret">
-                                <a class="nav-link dropdown-toggle"
-                                   href="#"
-                                   id="notifDropdown"
-                                   role="button"
-                                   data-bs-toggle="dropdown"
-                                   aria-haspopup="true"
-                                   aria-expanded="false">
-                                    <i class="fa fa-bell"></i>
-                                </a>
-                                <!-- Release Note Drowdown Item -->
-                                <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
-                                    <li>
-                                        <div class="dropdown-title">Release Note</div>
-                                    </li>
-                                    <li>
-                                        <div class="notif-scroll scrollbar-outer">
-                                            <div class="notif-center">
-                                                <a href="#">
-                                                    <div class="notif-icon notif-info">
-                                                        <i class="fa-solid fa-lightbulb"></i>
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="block">ベータ版をリリースしました</span>
-                                                        <span class="time">Version 0.0.1</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- Login User -->
-                            <li class="nav-item topbar-user dropdown hidden-caret">
-                                <a class="dropdown-toggle profile-pic"
-                                   href="#"
-                                   data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i class="fa fa-user d-block d-lg-none"></i>
-                                    <span class="profile-username">
-                                        <span class="op-7 me-1">12345</span>
-                                        <span class="fw-bold">藤野　佑亮</span>
-                                    </span>
-                                </a>
-                                <!-- Login User Dropwodn Item -->
-                                <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
-                                    <li>
-                                        <div class="dropdown-title">Account</div>
-                                    </li>
-                                    <li>
-                                        <div class="notif-scroll scrollbar-outer">
-                                            <div class="notif-center">
-                                                <a href="javascript:void(0);">
-                                                    <div class="notif-icon notif-primary">
-                                                        <i class="fa-solid fa-id-card"></i>
-                                                    </div>
-                                                    <div class="notif-content">
-                                                        <span class="block">藤野　佑亮</span>
-                                                        <span class="time">技開・技ＳＰ・インテグレーション・ＳＳ</span>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="see-all" href="javascript:void(0);">
-                                            Logout<i class="fa-solid fa-arrow-right-from-bracket"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+        <div class="container-fluid py-2">
 
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+            <!-- Page Content -->
+            <main>
+                @RenderBody()
+            </main>
 
-            <div class="container">
-                <div class="page-inner">
-                    <!-- Page Content -->
-                    <main>
-                        @RenderBody()
-                    </main>
-
-                    <!-- Footer -->
-                    <footer class="footer">
-                        <div class="container-fluid d-flex justify-content-between">
-                            <div class="copyright text-gray">
-                                Copyright &copy; Y.Fujino 2024
+            <!-- Footer -->
+            <footer class="footer py-4  ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                Copyright &copy; Y.Fujino <script>document.write(new Date().getFullYear())</script>
                             </div>
                         </div>
-                    </footer>
+                        <div class="col-lg-6">
+                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                <li class="nav-item">
+                                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </main>
+    <div class="fixed-plugin">
+        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+            <i class="fa-solid fa-gear fixed-plugin-button-icon"></i>
+        </a>
+        <div class="card shadow-lg">
+            <div class="card-header pb-0 pt-3">
+                <div class="float-start">
+                    <h5 class="mt-3 mb-0">Material UI Configurator</h5>
+                    <p>See our dashboard options.</p>
+                </div>
+                <div class="float-end mt-4">
+                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                        <i class="fa-solid fa-xmark fa-2xl"></i>
+                    </button>
+                </div>
+                <!-- End Toggle Button -->
+            </div>
+            <hr class="horizontal dark my-1">
+            <div class="card-body pt-sm-3 pt-0">
+                <!-- Sidebar Backgrounds -->
+                <div>
+                    <h6 class="mb-0">Sidebar Colors</h6>
+                </div>
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors my-2 text-start">
+                        <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+                    </div>
+                </a>
+                <!-- Sidenav Type -->
+                <div class="mt-3">
+                    <h6 class="mb-0">Sidenav Type</h6>
+                    <p class="text-sm">Choose between 2 different sidenav types.</p>
+                </div>
+                <div class="d-flex">
+                    <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark" onclick="sidebarType(this)">Dark</button>
+                    <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent" onclick="sidebarType(this)">Transparent</button>
+                    <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
+                </div>
+                <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+                <!-- Navbar Fixed -->
+                <div class="mt-3 d-flex">
+                    <h6 class="mb-0">Navbar Fixed</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+                    </div>
+                </div>
+                <hr class="horizontal dark my-3">
+                <div class="mt-2 d-flex">
+                    <h6 class="mb-0">Light / Dark</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
+                    </div>
+                </div>
+                <hr class="horizontal dark my-sm-4">
+                <a class="btn bg-gradient-info w-100" href="https://www.creative-tim.com/product/material-dashboard-pro">Free Download</a>
+                <a class="btn btn-outline-dark w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/material-dashboard">View documentation</a>
+                <div class="w-100 text-center">
+                    <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+                    <h6 class="mt-3">Thank you for sharing!</h6>
+                    <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
+                        <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
+                        <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
+                    </a>
                 </div>
             </div>
-
-            <!-- Partial View -->
-            @await Html.PartialAsync("_Toast")
-
-            <!-- KaiAdmin Template -->
-            <script src="~/lib/kaiadmin/core/jquery-3.7.1.min.js"></script>
-            <script src="~/lib/kaiadmin/core/popper.min.js"></script>
-            <script src="~/lib/kaiadmin/core/bootstrap.min.js"></script>
-            <script src="~/lib/kaiadmin/plugin/jquery.scrollbar.min.js"></script>
-            <script src="~/lib/kaiadmin/plugin/jquery.magnific-popup.min.js"></script>
-            <script src="~/lib/kaiadmin/kaiadmin.js"></script>
-
-            <!-- Flatpickr -->
-            <script src="~/lib/flatpickr/flatpickr.js"></script>
-
-            <!-- Custom JavaScript Shared -->
-            <script src="~/js/shared/site.js"></script>
-            <script src="~/js/shared/scripts.js"></script>
-            <script src="~/js/shared/toast.js"></script>
-
-            <!-- Custom JavaScript Page Content -->
-            @await RenderSectionAsync("Scripts", required: false)
-
         </div>
     </div>
 
+    <!-- Partial View -->
+    @await Html.PartialAsync("_Toast")
+
+    <!-- Material Dashboard Template -->
+    <script src="~/lib/material-dashboard/popper.min.js"></script>
+    <script src="~/lib/material-dashboard/bootstrap.min.js"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <script src="~/lib/material-dashboard/material-dashboard.js"></script>
+
+    <!-- Flatpickr -->
+    <script src="~/lib/flatpickr/flatpickr.js"></script>
+
+    <!-- Custom JavaScript Shared -->
+    <script src="~/js/shared/site.js"></script>
+    <script src="~/js/shared/scripts.js"></script>
+    <script src="~/js/shared/toast.js"></script>
+
+    <!-- Custom JavaScript Page Content -->
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
+
 </html>

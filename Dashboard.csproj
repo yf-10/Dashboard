@@ -33,7 +33,5 @@
   <ItemGroup>
     <Folder Include="wwwroot\lib\flatpickr\" />
     <Folder Include="wwwroot\lib\fontawesome\" />
-    <Folder Include="wwwroot\lib\kaiadmin\core\" />
-    <Folder Include="wwwroot\lib\kaiadmin\plugin\" />
   </ItemGroup>
 </Project>

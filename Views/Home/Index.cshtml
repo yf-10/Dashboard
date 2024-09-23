@@ -1,148 +1,110 @@
-﻿@{
-    ViewData["Title"] = "Welcome";
-}
-
-<div class="page-header">
-    <h3 class="fw-bold mb-3">Welcome To XXX</h3>
-</div>
-
-<!-- MENU -->
-<p class="text-gray fs-6">MENU</p>
+﻿<p class="text-gray fs-6 mb-4">MENU</p>
 <div class="row">
-    <div class="col-sm-6 col-md-3">
-        <div class="card card-stats card-round">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="fa-solid fa-pen-to-square text-danger"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-stats">
-                        <div class="">
-                            <h4 class="card-title">新規発行</h4>
-                            <a class="stretched-link" href="~/api">
-                                <p class="card-category">Publish</p>
-                            </a>
-                        </div>
-                    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-primary shadow-dark text-center text-light border-radius-xl mt-n4 position-absolute">
+                    <i class="fa-solid fa-pen-to-square fa-xl mt-3"></i>
                 </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Publish</p>
+                    <h4 class="mb-0"><a class="stretched-link" href="~/api">新規発行</a></h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">新たにXXXを発行する場合はこちら</p>
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-3">
-        <div class="card card-stats card-round">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="fa-solid fa-magnifying-glass text-primary"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-stats">
-                        <div class="">
-                            <h4 class="card-title">検索</h4>
-                            <a class="stretched-link" href="~/api">
-                                <p class="card-category">Search</p>
-                            </a>
-                        </div>
-                    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-info shadow-dark text-center text-light border-radius-xl mt-n4 position-absolute">
+                    <i class="fa-solid fa-magnifying-glass fa-xl mt-3"></i>
                 </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Search</p>
+                    <h4 class="mb-0"><a class="stretched-link" href="~/api">検索</a></h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">発行済のXXXを照会する場合はこちら</p>
             </div>
         </div>
     </div>
 </div>
-
-<!-- SETTING -->
-<p class="text-gray fs-6">SETTING</p>
+<p class="text-gray fs-6 mb-4 mt-3">SETTING</p>
 <div class="row">
-    <div class="col-sm-6 col-md-3">
-        <div class="card card-stats card-round">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="fa-solid fa-user-gear text-success"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-stats">
-                        <div class="">
-                            <h4 class="card-title">ユーザー設定</h4>
-                            <a class="stretched-link" href="~/api">
-                                <p class="card-category">User config</p>
-                            </a>
-                        </div>
-                    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-success shadow-dark text-center text-light border-radius-xl mt-n4 position-absolute">
+                    <i class="fa-solid fa-user-gear fa-xl mt-3"></i>
                 </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize">User Configuration</p>
+                    <h4 class="mb-0"><a class="stretched-link" href="~/api">ユーザー設定</a></h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">ユーザー個別の設定ははこちら</p>
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-3">
-        <div class="card card-stats card-round">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="fa-solid fa-users-gear text-secondary"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-stats">
-                        <div class="">
-                            <h4 class="card-title">共通設定</h4>
-                            <a class="stretched-link" href="~/api">
-                                <p class="card-category">Shared config</p>
-                            </a>
-                        </div>
-                    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-warning shadow-dark text-center text-light border-radius-xl mt-n4 position-absolute">
+                    <i class="fa-solid fa-users-gear fa-xl mt-3"></i>
                 </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Shared Configuration</p>
+                    <h4 class="mb-0"><a class="stretched-link" href="~/api">共通設定</a></h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">ユーザー共通の設定はこちら</p>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- OTHER -->
-<p class="text-gray fs-6">OTHER</p>
+<p class="text-gray fs-6 mb-4 mt-3">OTHER</p>
 <div class="row">
-    <div class="col-sm-6 col-md-3">
-        <div class="card card-stats card-round">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="fa-solid fa-comment-dots text-gray"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-stats">
-                        <div class="">
-                            <h4 class="card-title">問い合わせ</h4>
-                            <a class="stretched-link" href="~/api">
-                                <p class="card-category">Contact</p>
-                            </a>
-                        </div>
-                    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-secondary shadow-dark text-center text-light border-radius-xl mt-n4 position-absolute">
+                    <i class="fa-solid fa-comment-dots fa-xl mt-3"></i>
                 </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Contact</p>
+                    <h4 class="mb-0"><a class="stretched-link" href="~/api">問い合わせ</a></h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">要望・問い合わせはこちら</p>
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-md-3">
-        <div class="card card-stats card-round">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="icon-big text-center">
-                            <i class="fa-solid fa-lock text-gray"></i>
-                        </div>
-                    </div>
-                    <div class="col-7 col-stats">
-                        <div class="">
-                            <h4 class="card-title">管理者専用</h4>
-                            <a class="stretched-link" href="~/api">
-                                <p class="card-category">Only admin</p>
-                            </a>
-                        </div>
-                    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-secondary shadow-dark text-center text-light border-radius-xl mt-n4 position-absolute">
+                    <i class="fa-solid fa-lock fa-xl mt-3"></i>
                 </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0 text-capitalize">Only Administrator</p>
+                    <h4 class="mb-0"><a class="stretched-link" href="~/api">管理者専用</a></h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">システム管理者専用メニューです</p>
             </div>
         </div>
     </div>
